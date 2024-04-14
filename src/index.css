@@ -20,7 +20,7 @@ input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 2.5rem #282A36 inset !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   ::-webkit-scrollbar {
     width: 0rem;
     height: 0.35rem;

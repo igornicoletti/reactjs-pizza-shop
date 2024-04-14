@@ -7,7 +7,7 @@ import { PaginationComponent } from '../../components/pagination'
 import { FormVariants, OrderVariants } from '../../styles/variants'
 
 const { formcontent, formgroup, forminput, formlabel } = FormVariants()
-const { ordercontent, orderwrapper, ordertitle, orderguide, orderfilter, orderoverflow, ordertable, orderthead, ordertbody, orderrow, ordericon, orderstatus, orderping, orderaction } = OrderVariants()
+const { ordercontent, orderwrapper, ordertitle, orderguide, orderfilter, ordertooltip, orderoverflow, ordertable, orderthead, ordertbody, orderrow, ordericon, orderstatus, orderping, ordersteps, orderaction } = OrderVariants()
 
 export type OrderProps = {
   id: number
@@ -65,25 +65,30 @@ export const OrderPage = () => {
                     <td>
                       <button className={orderaction()} onClick={() => handleOrderDetails(data)}>
                         <FileSearchIcon className={ordericon()} aria-hidden='true' />
+                        <div className={ordertooltip()}><span>Detalhes</span></div>
                       </button>
                     </td>
                     <td>{data.identifier}</td>
                     <td>{data.min}</td>
                     <td>
                       <div className={orderstatus()}>
-                        <span className={orderping({ color: 'finished' })} />
+                        <span className={orderping()} />
                         <span>{data.status}</span>
                       </div>
                     </td>
                     <td>{data.name}</td>
                     <td>{intlNumberFormat.format(data.total)}</td>
                     <td>
-                      <button className={orderaction()}>
-                        <CheckIcon className={ordericon({ color: 'finished' })} aria-hidden='true' />
-                      </button>
-                      <button className={orderaction()}>
-                        <XIcon className={ordericon({ color: 'canceled' })} aria-hidden='true' />
-                      </button>
+                      <div className={ordersteps()}>
+                        <button className={orderaction()}>
+                          <CheckIcon className={ordericon({ color: 'finished' })} aria-hidden='true' />
+                          <div className={ordertooltip({ color: 'finished' })}><span>Concluir</span></div>
+                        </button>
+                        <button className={orderaction()}>
+                          <XIcon className={ordericon({ color: 'canceled' })} aria-hidden='true' />
+                          <div className={ordertooltip({ color: 'canceled' })}><span>Cancelar</span></div>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

@@ -48,7 +48,7 @@ export const ModalComponent = ({ currentModal, currentOrder, handleCloseModal }:
                         </tr>
                       </thead>
                       <tbody className={modaltbody()}>
-                        {Array.from({ length: 20 }).map((_, i) => (
+                        {Array.from({ length: 5 }).map((_, i) => (
                           <tr className={modalrow()} key={i}>
                             <td>Pizza Tradicional Família</td>
                             <td>{qtde}</td>

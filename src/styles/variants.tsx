@@ -56,21 +56,22 @@ export const OrderVariants = tv({
     ordertbody: 'divide-y-4 divide-in-dark',
     orderrow: '*:whitespace-nowrap *:p-3 first:*:text-center last:*:text-center',
     orderstatus: 'flex items-center gap-2',
-    orderping: 'w-2 h-2 rounded-full',
-    orderaction: 'focus:outline-none px-4',
+    ordersteps: 'flex items-center justify-center gap-6',
+    orderping: 'w-2 h-2 rounded-full bg-in-stone',
+    orderaction: 'relative focus:outline-none group',
+    ordertooltip: 'absolute z-10 px-2 py-1 rounded-md shadow-lg text-xs left-2/4 -translate-x-2/4 -top-full -translate-y-2/4 group-hover:border-b-2 border-in-cyan bg-in-cyan/10 invisible group-hover:visible',
     ordericon: 'size-5 shrink-0 hover:text-in-cyan transition ease-in-out duration-200',
   },
   variants: {
     color: {
-      pending: {
-        orderping: 'bg-in-stone',
-      },
       finished: {
         orderping: 'bg-in-green',
+        ordertooltip: 'border-in-green',
         ordericon: 'hover:text-in-green',
       },
       canceled: {
         orderping: 'bg-in-red',
+        ordertooltip: 'border-in-red',
         ordericon: 'hover:text-in-red',
       },
     }
@@ -84,7 +85,7 @@ export const PaginationVariants = tv({
     paginginfo: 'text-sm md:text-base',
     pagingnumb: 'font-semibold',
     paginggroup: 'flex items-center gap-2',
-    pagingaction: 'p-2 rounded-md border border-in-stone hover:bg-in-slate hover:border-in-cyan hover:text-in-cyan focus:outline-none transition ease-in-out duration-200',
+    pagingaction: 'relative p-2 rounded-md border border-in-stone hover:bg-in-slate hover:border-in-cyan hover:text-in-cyan focus:outline-none transition ease-in-out duration-200 group',
     pagingicon: 'size-5',
   }
 })
@@ -115,9 +116,9 @@ export const ModalVariants = tv({
     modaltable: 'min-w-full divide-y-2 divide-in-dark',
     modalthead: 'text-right',
     modaltbody: 'divide-y-2 divide-in-dark text-right',
-    modaltfoot: '*:whitespace-nowrap *:p-3 uppercase text-right',
+    modaltfoot: '*:whitespace-nowrap *:p-3 *:pt-6 uppercase text-right',
     modalrow: '*:whitespace-nowrap *:p-3 first:*:text-left',
-    modalclose: 'absolute hidden md:block right-0 top-0 p-4 text-in-zinc hover:text-in-white focus:outline-none transition ease-in-out duration-200',
+    modalclose: 'absolute right-0 top-0 p-4 text-in-zinc hover:text-in-white focus:outline-none transition ease-in-out duration-200',
     modalicon: 'size-5 shrink-0',
   }
 })
