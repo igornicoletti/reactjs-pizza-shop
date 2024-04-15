@@ -7,10 +7,11 @@ import { PaginationComponent } from '../../components/pagination'
 import { FormVariants, OrderVariants } from '../../styles/variants'
 
 const { formcontent, formgroup, forminput, formlabel } = FormVariants()
-const { ordercontent, orderwrapper, ordertitle, orderguide, orderfilter, ordertooltip, orderoverflow, ordertable, orderthead, ordertbody, orderrow, ordericon, orderstatus, orderping, ordersteps, orderaction } = OrderVariants()
+const { ordercontent, orderwrapper, ordertitle, orderguide, orderfilter, ordertooltip, orderoverflow, ordertable, orderthead, ordertbody, orderrow, ordericon, orderstatus, ordersteps, orderaction } = OrderVariants()
 
 export type OrderProps = {
   id: number
+  statusId: string
   identifier: number
   min: string
   status: string
@@ -71,10 +72,9 @@ export const OrderPage = () => {
                     <td>{data.identifier}</td>
                     <td>{data.min}</td>
                     <td>
-                      <div className={orderstatus()}>
-                        <span className={orderping()} />
-                        <span>{data.status}</span>
-                      </div>
+                      {data.status === 'Pendente' && <span className={orderstatus()}>Pendente</span>}
+                      {data.status === 'Concluído' && <span className={orderstatus({ color: 'finished' })}>Concluído</span>}
+                      {data.status === 'Cancelado' && <span className={orderstatus({ color: 'canceled' })}>Cancelado</span>}
                     </td>
                     <td>{data.name}</td>
                     <td>{intlNumberFormat.format(data.total)}</td>
