@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path: '/dashboard',
+    path: '/',
     element: <AppPage />,
     errorElement: <ErrorPage />,
     children: [
