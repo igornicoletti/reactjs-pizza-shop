@@ -15,7 +15,6 @@ type Props = {
 }
 
 export const ModalComponent = ({ currentModal, currentOrder, handleCloseModal }: Props) => {
-  const qtde = 2
   const intlNumberFormat = new Intl.NumberFormat('pt-br', { currency: 'BRL', style: 'currency' })
 
   return (
@@ -51,7 +50,7 @@ export const ModalComponent = ({ currentModal, currentOrder, handleCloseModal }:
                         {Array.from({ length: 5 }).map((_, i) => (
                           <tr className={modalrow()} key={i}>
                             <td>Pizza Tradicional Família</td>
-                            <td>{qtde}</td>
+                            <td>2</td>
                             <td>{intlNumberFormat.format(currentOrder ? currentOrder.total : 0)}</td>
                             <td>{intlNumberFormat.format(currentOrder ? currentOrder.total * 2 : 0)}</td>
                           </tr>
