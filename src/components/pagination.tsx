@@ -19,16 +19,16 @@ export const PaginationComponent = ({ pageIndex, totalCount, peerPage }: Props) 
         <p className={paginginfo()}>Página <span className={pagingnumb()}>{pageIndex + 1}</span> de <span className={pagingnumb()}>{pages}</span></p>
         <div className={paginggroup()}>
           <button className={pagingaction()}>
-            <ChevronsLeftIcon className={pagingicon()} aria-hidden='true' />
+            <ChevronsLeftIcon className={pagingicon()} aria-hidden={true} />
           </button>
           <button className={pagingaction()}>
-            <ChevronLeftIcon className={pagingicon()} aria-hidden='true' />
+            <ChevronLeftIcon className={pagingicon()} aria-hidden={true} />
           </button>
           <button className={pagingaction()}>
-            <ChevronRightIcon className={pagingicon()} aria-hidden='true' />
+            <ChevronRightIcon className={pagingicon()} aria-hidden={true} />
           </button>
           <button className={pagingaction()}>
-            <ChevronsRightIcon className={pagingicon()} aria-hidden='true' />
+            <ChevronsRightIcon className={pagingicon()} aria-hidden={true} />
           </button>
         </div>
       </div>

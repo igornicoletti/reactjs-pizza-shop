@@ -65,7 +65,7 @@ export const OrderPage = () => {
                   <tr className={orderrow()} key={data.id}>
                     <td>
                       <button className={orderaction()} onClick={() => handleOrderDetails(data)}>
-                        <FileSearchIcon className={ordericon()} aria-hidden='true' />
+                        <FileSearchIcon className={ordericon()} aria-hidden={true} />
                         <div className={ordertooltip()}><span>Detalhes</span></div>
                       </button>
                     </td>
@@ -81,11 +81,11 @@ export const OrderPage = () => {
                     <td>
                       <div className={ordersteps()}>
                         <button className={orderaction()}>
-                          <CheckIcon className={ordericon({ color: 'finished' })} aria-hidden='true' />
+                          <CheckIcon className={ordericon({ color: 'finished' })} aria-hidden={true} />
                           <div className={ordertooltip({ color: 'finished' })}><span>Concluir</span></div>
                         </button>
                         <button className={orderaction()}>
-                          <XIcon className={ordericon({ color: 'canceled' })} aria-hidden='true' />
+                          <XIcon className={ordericon({ color: 'canceled' })} aria-hidden={true} />
                           <div className={ordertooltip({ color: 'canceled' })}><span>Cancelar</span></div>
                         </button>
                       </div>

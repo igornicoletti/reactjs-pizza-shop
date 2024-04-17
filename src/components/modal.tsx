@@ -3,9 +3,10 @@ import { XIcon } from 'lucide-react'
 import { Dialog, Transition } from '@headlessui/react'
 
 import { OrderProps } from '../routes/app/order'
-import { ModalVariants, TransitionVariants } from '../styles/variants'
+import { ModalVariants, OpacityVariants, ScaleVariants } from '../styles/variants'
 
-const { jumpenter, jumpenterto, jumpfrom, jumpleave, jumpleavefrom, jumpleaveto, jumpchildenter, jumpchildenterto, jumpchildfrom, jumpchildleave, jumpchildleavefrom, jumpchildleaveto } = TransitionVariants()
+const { scaleenter, scaleenterto, scalefrom, scaleleave, scaleleavefrom, scaleleaveto } = ScaleVariants()
+const { opacityenter, opacityenterto, opacityfrom, opacityleave, opacityleavefrom, opacityleaveto } = OpacityVariants()
 const { modalcontent, modalbackdrop, modaldialog, modalwrapper, modalpanel, modalguide, modalhead, modalclose, modalicon, modaltitle, modaldescript, modaloverflow, modaltable, modalthead, modaltbody, modaltfoot, modalrow } = ModalVariants()
 
 type Props = {
@@ -21,15 +22,15 @@ export const ModalComponent = ({ currentModal, currentOrder, handleCloseModal }:
     <Transition appear show={currentModal} as={Fragment}>
       <Dialog className={modalcontent()} onClose={handleCloseModal}>
         <Transition.Child as={Fragment}
-          enter={jumpenter()} enterFrom={jumpfrom()} enterTo={jumpenterto()}
-          leave={jumpleave()} leaveFrom={jumpleavefrom()} leaveTo={jumpleaveto()}>
+          enter={opacityenter()} enterFrom={opacityfrom()} enterTo={opacityenterto()}
+          leave={opacityleave()} leaveFrom={opacityleavefrom()} leaveTo={opacityleaveto()}>
           <div className={modalbackdrop()} />
         </Transition.Child>
         <div className={modaldialog()}>
           <div className={modalwrapper()}>
             <Transition.Child as={Fragment}
-              enter={jumpchildenter()} enterFrom={jumpchildfrom()} enterTo={jumpchildenterto()}
-              leave={jumpchildleave()} leaveFrom={jumpchildleavefrom()} leaveTo={jumpchildleaveto()}>
+              enter={scaleenter()} enterFrom={scalefrom()} enterTo={scaleenterto()}
+              leave={scaleleave()} leaveFrom={scaleleavefrom()} leaveTo={scaleleaveto()}>
               <Dialog.Panel className={modalpanel()}>
                 <div className={modalguide()}>
                   <div className={modalhead()}>
@@ -66,7 +67,7 @@ export const ModalComponent = ({ currentModal, currentOrder, handleCloseModal }:
                   </div>
                 </div>
                 <button className={modalclose()} onClick={handleCloseModal}>
-                  <XIcon className={modalicon()} aria-hidden='true' />
+                  <XIcon className={modalicon()} aria-hidden={true} />
                 </button>
               </Dialog.Panel>
             </Transition.Child>
