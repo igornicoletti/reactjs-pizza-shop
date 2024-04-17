@@ -14,7 +14,7 @@ export const AuthVariants = tv({
     authhead: 'flex flex-col items-center gap-2',
     authtitle: 'uppercase text-4xl',
     authdescript: 'md:text-lg',
-    authlink: 'underline underline-offset-4 decoration-1 hover:decoration-2 decoration-in-cyan transition ease-in-out duration-100',
+    authlink: 'underline underline-offset-4 decoration-1 hover:decoration-2 decoration-in-cyan transition ease-in-out duration-300',
   }
 })
 
@@ -24,19 +24,19 @@ export const HeaderVariants = tv({
     headerwrapper: 'w-full flex items-center justify-between gap-8 font-medium',
     headerlf: 'flex items-center divide-x-2 divide-in-stone gap-6',
     headerlogo: 'size-6 shrink-0',
-    headernav: 'hidden sm:flex items-center gap-6 px-6',
-    headerlink: 'flex items-center gap-2 uppercase aria-[current=page]:underline underline-offset-4 aria-[current=page]:decoration-2 decoration-in-cyan transition ease-in-out duration-100',
-    headeraction: 'size-4 shrink-0',
+    headeritems: 'hidden sm:flex items-center gap-6 px-6',
+    headeritem: 'flex items-center gap-2 uppercase aria-[current=page]:underline underline-offset-4 aria-[current=page]:decoration-2 decoration-in-cyan focus:outline-none group',
+    headericon: 'size-4 shrink-0 group-aria-[current=page]:text-in-cyan',
   }
 })
 
 export const MenuVariants = tv({
   slots: {
     menucontent: 'relative z-10',
-    menuaction: 'flex items-center gap-2 uppercase hover:text-in-cyan focus:outline-none transition ease-in-out duration-100',
-    menudownicon: 'size-4 shrink-0',
-    menuitems: 'absolute origin-top-right right-0 w-64 flex flex-col gap-2 p-2 mt-2 rounded-md shadow-lg bg-in-slate focus:outline-none',
-    menuitem: 'flex sm:[&:nth-child(1)]:hidden sm:[&:nth-child(2)]:hidden items-center gap-2 p-2 rounded-md hover:bg-in-cyan hover:text-in-dark group transition ease-in-out duration-100',
+    menuaction: 'flex items-center gap-2 uppercase hover:text-in-cyan focus:outline-none group transition ease-in-out duration-300',
+    menudownicon: 'size-4 shrink-0 group-aria-[expanded=true]:-rotate-180 transform transition ease-in-out duration-300',
+    menuitems: 'absolute origin-top-right right-0 w-60 flex flex-col gap-2 p-2 mt-2 rounded-md shadow-lg bg-in-slate focus:outline-none',
+    menuitem: 'flex sm:[&:nth-child(1)]:hidden sm:[&:nth-child(2)]:hidden items-center gap-2 p-2 rounded-md hover:bg-in-cyan hover:text-in-dark focus:outline-none group transition ease-in-out duration-300',
     menuicon: 'size-4 shrink-0 text-in-cyan group-hover:text-in-dark',
   }
 })
@@ -64,26 +64,26 @@ export const OrderVariants = tv({
     orderfilter: 'w-full sm:max-w-sm pb-2',
     orderoverflow: 'overflow-x-auto',
     ordertable: 'min-w-full text-left divide-y-2 divide-in-dark bg-in-slate',
-    orderthead: 'lg:border-x-2 border-in-cyan uppercase',
+    orderthead: 'lg:border-x-2 border-in-cyan',
     ordertbody: 'divide-y-2 divide-in-dark',
-    orderrow: '*:whitespace-nowrap *:px-4 *:py-2 first:*:text-center last:*:text-center',
+    orderrow: '*:whitespace-nowrap *:px-4 *:py-3 first:*:text-center last:*:text-center',
     orderstatus: 'px-2 rounded-full text-xs md:text-sm font-medium bg-in-cyan/5 border border-in-cyan text-in-cyan',
-    ordersteps: 'flex items-center justify-center gap-4',
-    orderaction: 'relative focus:outline-none group',
-    ordertooltip: 'absolute z-10 px-2 py-1 rounded-md shadow-lg text-xs md:text-sm font-medium left-2/4 -translate-x-2/4 -top-full -translate-y-2/4 group-hover:border-b-2 border-in-cyan bg-in-cyan/10 invisible group-hover:visible',
-    ordericon: 'size-5 shrink-0 hover:text-in-cyan transition ease-in-out duration-100',
+    ordersteps: 'flex items-center justify-center gap-2',
+    orderaction: 'relative px-2 group hover:text-in-cyan focus:outline-none transition ease-in-out duration-300',
+    ordericon: 'size-4 shrink-0',
+    ordertooltip: 'absolute z-10 px-2 py-1 rounded-md shadow-lg text-xs md:text-sm font-medium left-2/4 -translate-x-2/4 -top-full -translate-y-2/4 group-hover:border-b-2 border-in-cyan bg-in-cyan/10 text-in-white invisible group-hover:visible',
   },
   variants: {
     color: {
       finished: {
         orderstatus: 'bg-in-green/5 border border-in-green text-in-green',
+        orderaction: 'hover:text-in-green',
         ordertooltip: 'border-in-green',
-        ordericon: 'hover:text-in-green',
       },
       canceled: {
         orderstatus: 'bg-in-red/5 border border-in-red text-in-red',
+        orderaction: 'hover:text-in-red',
         ordertooltip: 'border-in-red',
-        ordericon: 'hover:text-in-red',
       },
     }
   }
@@ -96,7 +96,7 @@ export const PaginationVariants = tv({
     paginginfo: 'text-sm',
     pagingnumb: 'font-semibold',
     paginggroup: 'flex items-center gap-1',
-    pagingaction: 'p-2 rounded-md border border-in-stone hover:bg-in-slate hover:border-in-cyan hover:text-in-cyan focus:outline-none group transition ease-in-out duration-100',
+    pagingaction: 'p-2 rounded-md border border-in-stone hover:bg-in-slate hover:border-in-cyan hover:text-in-cyan focus:outline-none group transition ease-in-out duration-300',
     pagingicon: 'size-4',
   }
 })
@@ -105,10 +105,10 @@ export const FormVariants = tv({
   slots: {
     formcontent: 'flex flex-col gap-4',
     formgroup: 'relative h-12',
-    forminput: 'w-full h-full px-4 rounded-md peer border border-in-stone hover:border-in-white focus:border-in-cyan bg-transparent focus:outline-none invalid:border-in-red hover:invalid:border-in-red focus:invalid:border-in-red transition ease-in-out duration-100',
-    formlabel: 'absolute top-3 left-px px-4 bg-in-dark text-in-cyan peer-focus:text-in-cyan peer-placeholder-shown:text-in-white peer-invalid:text-in-red peer-focus:peer-invalid:text-in-red scale-75 peer-focus:scale-75 peer-placeholder-shown:scale-100 transform -translate-y-5 peer-focus:-translate-y-5 peer-placeholder-shown:translate-y-0 transition ease-in-out duration-100',
+    forminput: 'w-full h-full px-4 rounded-md peer border border-in-stone hover:border-in-white focus:border-in-cyan bg-transparent focus:outline-none invalid:border-in-red hover:invalid:border-in-red focus:invalid:border-in-red transition ease-in-out duration-300',
+    formlabel: 'absolute top-3 left-px px-4 bg-in-dark text-in-cyan peer-focus:text-in-cyan peer-placeholder-shown:text-in-white peer-invalid:text-in-red peer-focus:peer-invalid:text-in-red scale-75 peer-focus:scale-75 peer-placeholder-shown:scale-100 transform -translate-y-5 peer-focus:-translate-y-5 peer-placeholder-shown:translate-y-0 transition ease-in-out duration-300',
     formerror: 'absolute -bottom-2 right-2 px-4 bg-in-dark text-in-white text-xs',
-    formaction: 'flex items-center justify-center h-12 py-2 px-6 uppercase rounded-md border border-in-cyan bg-in-cyan text-in-dark disabled:cursor-not-allowed focus:outline-none transform transition ease-in-out duration-100',
+    formaction: 'flex items-center justify-center h-12 py-2 px-6 uppercase rounded-md border border-in-cyan bg-in-cyan text-in-dark disabled:cursor-not-allowed focus:outline-none transform transition ease-in-out duration-300',
   }
 })
 
@@ -125,12 +125,12 @@ export const ModalVariants = tv({
     modaldescript: 'md:text-lg text-in-cyan',
     modaloverflow: 'overflow-x-auto',
     modaltable: 'min-w-full divide-y-2 divide-in-dark',
-    modalthead: 'text-right uppercase',
+    modalthead: 'text-right',
     modaltbody: 'divide-y-2 divide-in-dark text-right',
-    modaltfoot: '*:whitespace-nowrap *:p-3 *:pt-6 uppercase text-right',
-    modalrow: '*:whitespace-nowrap *:p-3 first:*:text-left',
-    modalclose: 'absolute right-0 top-0 p-4 text-in-zinc hover:text-in-white focus:outline-none transition ease-in-out duration-100',
-    modalicon: 'size-5 shrink-0',
+    modaltfoot: '*:whitespace-nowrap *:p-4 *:pt-6 uppercase text-right',
+    modalrow: '*:whitespace-nowrap *:px-4 *:py-3 first:*:text-left',
+    modalclose: 'absolute right-0 top-0 p-4 text-in-white hover:text-in-cyan focus:outline-none transition ease-in-out duration-300',
+    modalicon: 'size-4 shrink-0',
   }
 })
 

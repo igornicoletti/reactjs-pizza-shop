@@ -66,7 +66,7 @@ export const OrderPage = () => {
                     <td>
                       <button className={orderaction()} onClick={() => handleOrderDetails(data)}>
                         <FileSearchIcon className={ordericon()} aria-hidden={true} />
-                        <div className={ordertooltip()}><span>Detalhes</span></div>
+                        <p className={ordertooltip()}>Detalhes</p>
                       </button>
                     </td>
                     <td>{data.identifier}</td>
@@ -80,13 +80,13 @@ export const OrderPage = () => {
                     <td>{intlNumberFormat.format(data.total)}</td>
                     <td>
                       <div className={ordersteps()}>
-                        <button className={orderaction()}>
-                          <CheckIcon className={ordericon({ color: 'finished' })} aria-hidden={true} />
-                          <div className={ordertooltip({ color: 'finished' })}><span>Concluir</span></div>
+                        <button className={orderaction({ color: 'finished' })}>
+                          <CheckIcon className={ordericon()} aria-hidden={true} />
+                          <p className={ordertooltip({ color: 'finished' })}>Concluir</p>
                         </button>
-                        <button className={orderaction()}>
-                          <XIcon className={ordericon({ color: 'canceled' })} aria-hidden={true} />
-                          <div className={ordertooltip({ color: 'canceled' })}><span>Cancelar</span></div>
+                        <button className={orderaction({ color: 'canceled' })}>
+                          <XIcon className={ordericon()} aria-hidden={true} />
+                          <p className={ordertooltip({ color: 'canceled' })}>Cancelar</p>
                         </button>
                       </div>
                     </td>
