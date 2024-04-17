@@ -8,11 +8,11 @@ import { MenuVariants, ScaleVariants } from '../styles/variants'
 const { menucontent, menuaction, menudownicon, menuitems, menuitem, menuicon } = MenuVariants()
 const { scaleenter, scaleenterto, scalefrom, scaleleave, scaleleavefrom, scaleleaveto } = ScaleVariants()
 
-const links = [
-  { id: 1, href: 'dashboard', icon: PanelsTopLeftIcon, label: 'Dashboard' },
-  { id: 2, href: 'order', icon: SquareGanttChartIcon, label: 'Pedidos' },
-  { id: 3, href: '/', icon: SettingsIcon, label: 'Configurações' },
-  { id: 4, href: '/', icon: LogOutIcon, label: 'Sair' }
+const menuData = [
+  { id: 1, icon: PanelsTopLeftIcon, ancor: 'dashboard', title: 'Dashboard' },
+  { id: 2, icon: SquareGanttChartIcon, ancor: 'order', title: 'Pedidos' },
+  { id: 3, icon: SettingsIcon, ancor: '/', title: 'Configurações' },
+  { id: 4, icon: LogOutIcon, ancor: '/', title: 'Sair' }
 ]
 
 export const MenuComponent = () => {
@@ -26,10 +26,10 @@ export const MenuComponent = () => {
         enter={scaleenter()} enterFrom={scalefrom()} enterTo={scaleenterto()}
         leave={scaleleave()} leaveFrom={scaleleavefrom()} leaveTo={scaleleaveto()}>
         <Menu.Items className={menuitems()}>
-          {links.map((link) => (
-            <Menu.Item className={menuitem()} as={Link} to={link.href} key={link.id}>
-              <link.icon className={menuicon()} aria-hidden={true} />
-              <span>{link.label}</span>
+          {menuData.map((data) => (
+            <Menu.Item className={menuitem()} as={Link} to={data.ancor} key={data.id}>
+              <data.icon className={menuicon()} aria-hidden={true} />
+              <span>{data.title}</span>
             </Menu.Item>
           ))}
         </Menu.Items>
