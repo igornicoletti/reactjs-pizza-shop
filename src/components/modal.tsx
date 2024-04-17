@@ -40,9 +40,9 @@ export const ModalComponent = ({ currentModal, currentOrder, handleCloseModal }:
                     <table className={modaltable()}>
                       <thead className={modalthead()}>
                         <tr className={modalrow()}>
-                          <th scope='col'>Produto</th>
+                          <th scope='col'>Nome do pedido</th>
                           <th scope='col'>Qtd</th>
-                          <th scope='col'>Preço</th>
+                          <th scope='col'>Valor unit</th>
                           <th scope='col'>Subtotal</th>
                         </tr>
                       </thead>

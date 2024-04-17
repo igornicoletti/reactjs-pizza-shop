@@ -21,10 +21,11 @@ export const AuthVariants = tv({
 export const HeaderVariants = tv({
   slots: {
     headercontent: 'flex py-8',
-    headerwrapper: 'w-full flex items-center divide-x-2 divide-in-stone gap-8',
-    headerlogo: 'size-6 shrink-0',
-    headernav: 'flex items-center gap-8 px-8',
-    headerlink: 'flex items-center gap-2 uppercase text-in-zinc aria-[current=page]:text-in-white',
+    headerwrapper: 'w-full flex items-center justify-between gap-8 font-medium',
+    headerlf: 'flex items-center divide-x-2 divide-in-stone gap-6',
+    headerlogo: 'size-5 shrink-0 text-in-cyan',
+    headernav: 'flex items-center gap-6 px-6',
+    headerlink: 'flex items-center gap-2 uppercase aria-[current=page]:underline underline-offset-4 aria-[current=page]:decoration-2 decoration-in-cyan transition ease-in-out duration-200',
     headeraction: 'size-4 shrink-0',
   }
 })
@@ -35,10 +36,10 @@ export const DashboardVariants = tv({
     dashwrapper: 'w-full flex flex-col gap-8',
     dashtitle: 'text-3xl',
     dashguide: 'flex flex-col',
-    dashhcards: 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8',
-    dashhcard: 'flex flex-col items-end p-6 pb-4 rounded-md border-b-2 border-in-stone bg-gradient-to-t from-in-slate',
+    dashhcards: 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6',
+    dashhcard: 'flex flex-col items-end p-4 md:p-6 md:pb-4 rounded-md border-b-2 border-in-stone bg-gradient-to-t from-in-slate',
     dashhinfo: 'text-in-cyan',
-    dashvalue: 'text-3xl pt-6',
+    dashvalue: 'text-3xl pt-2 md:pt-4',
     dashdescript: 'text-sm',
   }
 })
@@ -49,14 +50,14 @@ export const OrderVariants = tv({
     orderwrapper: 'w-full flex flex-col gap-8',
     ordertitle: 'text-3xl',
     orderguide: 'flex flex-col gap-2',
-    orderfilter: 'w-full max-w-lg pb-2',
+    orderfilter: 'w-full max-w-sm pb-2',
     orderoverflow: 'overflow-x-auto',
-    ordertable: 'min-w-full text-left divide-y-4 divide-in-dark bg-in-slate',
-    orderthead: 'border-x-2 border-in-cyan',
-    ordertbody: 'divide-y-4 divide-in-dark',
-    orderrow: '*:whitespace-nowrap *:px-6 *:py-3 first:*:text-center last:*:text-center',
+    ordertable: 'min-w-full text-left divide-y-2 divide-in-dark bg-in-slate',
+    orderthead: 'lg:border-x-2 border-in-cyan uppercase',
+    ordertbody: 'divide-y-2 divide-in-dark',
+    orderrow: '*:whitespace-nowrap *:px-4 *:py-2 first:*:text-center last:*:text-center',
     orderstatus: 'px-2 rounded-full text-xs md:text-sm font-medium bg-in-cyan/5 border border-in-cyan text-in-cyan',
-    ordersteps: 'flex items-center justify-center gap-6',
+    ordersteps: 'flex items-center justify-center gap-4',
     orderaction: 'relative focus:outline-none group',
     ordertooltip: 'absolute z-10 px-2 py-1 rounded-md shadow-lg text-xs md:text-sm font-medium left-2/4 -translate-x-2/4 -top-full -translate-y-2/4 group-hover:border-b-2 border-in-cyan bg-in-cyan/10 invisible group-hover:visible',
     ordericon: 'size-5 shrink-0 hover:text-in-cyan transition ease-in-out duration-200',
@@ -81,11 +82,11 @@ export const PaginationVariants = tv({
   slots: {
     pagingcontent: 'flex flex-col sm:flex-row items-end sm:items-center justify-between gap-2',
     pagingwrapper: 'flex items-center gap-4',
-    paginginfo: 'text-sm md:text-base',
+    paginginfo: 'text-sm',
     pagingnumb: 'font-semibold',
     paginggroup: 'flex items-center gap-1',
     pagingaction: 'relative p-2 rounded-md border border-in-stone hover:bg-in-slate hover:border-in-cyan hover:text-in-cyan focus:outline-none transition ease-in-out duration-200 group',
-    pagingicon: 'size-5',
+    pagingicon: 'size-4',
   }
 })
 
@@ -113,7 +114,7 @@ export const ModalVariants = tv({
     modaldescript: 'md:text-lg text-in-cyan',
     modaloverflow: 'overflow-x-auto',
     modaltable: 'min-w-full divide-y-2 divide-in-dark',
-    modalthead: 'text-right',
+    modalthead: 'text-right uppercase',
     modaltbody: 'divide-y-2 divide-in-dark text-right',
     modaltfoot: '*:whitespace-nowrap *:p-3 *:pt-6 uppercase text-right',
     modalrow: '*:whitespace-nowrap *:p-3 first:*:text-left',
@@ -124,17 +125,17 @@ export const ModalVariants = tv({
 
 export const TransitionVariants = tv({
   slots: {
-    jumpenter: 'ease-out duration-300',
-    jumpfrom: 'opacity-0',
-    jumpenterto: 'opacity-100',
-    jumpleave: 'ease-in duration-200',
-    jumpleavefrom: 'opacity-100',
-    jumpleaveto: 'opacity-0',
-    jumpchildenter: 'ease-out duration-300',
-    jumpchildfrom: 'opacity-0 translate-y-8',
-    jumpchildenterto: 'opacity-100 translate-y-0',
-    jumpchildleave: 'ease-in duration-200',
-    jumpchildleavefrom: 'opacity-100 scale-100',
-    jumpchildleaveto: 'opacity-0 scale-95',
+    jumpenter: 'transition ease-out duration-100',
+    jumpfrom: 'transform opacity-0',
+    jumpenterto: 'transform opacity-100',
+    jumpleave: 'transition ease-in duration-75',
+    jumpleavefrom: 'transform opacity-100',
+    jumpleaveto: 'transform opacity-0',
+    jumpchildenter: 'transition ease-out duration-100',
+    jumpchildfrom: 'transform opacity-0 scale-95',
+    jumpchildenterto: 'transform opacity-100 scale-100',
+    jumpchildleave: 'transition ease-in duration-75',
+    jumpchildleavefrom: 'transform opacity-100 scale-100',
+    jumpchildleaveto: 'transform opacity-0 scale-95',
   }
 })

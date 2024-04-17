@@ -43,7 +43,7 @@ export const OrderPage = () => {
             <Form className={formcontent()}>
               <div className={formgroup()}>
                 <input className={forminput()} type='filter' id='filter' placeholder=' ' />
-                <label className={formlabel()} htmlFor='filter'>Filtrar por cliente</label>
+                <label className={formlabel()} htmlFor='filter'>Filtrar cliente</label>
               </div>
             </Form>
           </div>
@@ -52,7 +52,7 @@ export const OrderPage = () => {
               <thead className={orderthead()}>
                 <tr className={orderrow()}>
                   <th scope='col'>Ver</th>
-                  <th scope='col'>Identificador</th>
+                  <th scope='col'>Id do pedido</th>
                   <th scope='col'>Realizado há</th>
                   <th scope='col'>Status</th>
                   <th scope='col'>Nome do cliente</th>
