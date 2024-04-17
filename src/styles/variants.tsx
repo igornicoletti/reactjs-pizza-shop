@@ -46,11 +46,11 @@ export const DashboardVariants = tv({
     dashcontent: 'flex grow py-8 md:py-16',
     dashwrapper: 'w-full flex flex-col gap-4 md:gap-8',
     dashtitle: 'text-3xl',
-    dashguide: 'flex flex-col gap-8',
-    dashhcards: 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8',
-    dashhcard: 'flex flex-col p-4 md:p-6 rounded-md shadow-lg border-b border-in-cyan bg-gradient-to-br from-in-slate',
-    dashhinfo: 'uppercase font-medium pb-4',
-    dashvalue: 'text-3xl',
+    dashguide: 'flex flex-col gap-6',
+    dashhcards: 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6',
+    dashhcard: 'flex flex-col p-4 rounded-md shadow-lg border-b border-in-cyan bg-gradient-to-br from-in-slate',
+    dashhinfo: 'font-medium pb-2',
+    dashvalue: 'text-3xl font-semibold',
     dashdescript: 'text-sm',
   }
 })

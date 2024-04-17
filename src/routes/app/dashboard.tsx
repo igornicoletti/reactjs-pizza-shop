@@ -4,10 +4,10 @@ import { DashboardVariants } from "../../styles/variants"
 const { dashcontent, dashwrapper, dashtitle, dashguide, dashhcards, dashhcard, dashhinfo, dashvalue, dashdescript } = DashboardVariants();
 
 const dashboardData = [
-  { id: 1, title: "Pedidos no dia", value: 38, dashdescript: "+2% em relação ao ano passado", },
-  { id: 2, title: "Pedidos no mês", value: 124, dashdescript: "+2% em relação ao ano passado", },
-  { id: 3, title: "Cancelamentos no mês", value: 12, dashdescript: "+2% em relação ao ano passado", },
-  { id: 4, title: "Faturamento no mês", value: 1448.60, dashdescript: "+2% em relação ao ano passado", },
+  { id: 1, title: "Pedidos", value: '38', dashdescript: "+20.1% em relação ao dia anterior", },
+  { id: 2, title: "Vendas", value: '124', dashdescript: "+18.1% em relação ao mês passado", },
+  { id: 3, title: "Cancelados", value: '12', dashdescript: "-8% em relação ao mês passado", },
+  { id: 4, title: "Rendimento total", value: 'R$ 1448.60', dashdescript: "+38% em relação ao mês passado", },
 ]
 
 const data = [
@@ -28,8 +28,6 @@ const data2 = [
 const COLORS = ['#8Be9fd', '#f472b6', '#c084fc', '#fde047']
 
 export const DashboardPage = () => {
-  const currentFormat = new Intl.NumberFormat('pt-br', { currency: 'BRL', style: 'currency' })
-
   return (
     <div className={dashcontent()}>
       <div className={dashwrapper()}>
@@ -39,15 +37,15 @@ export const DashboardPage = () => {
             {dashboardData.map((data) => (
               <li className={dashhcard()} key={data.id}>
                 <p className={dashhinfo()}>{data.title}</p>
-                <p className={dashvalue()}>{data.id === 4 ? currentFormat.format(data.value) : data.value}</p>
+                <p className={dashvalue()}>{data.value}</p>
                 <p className={dashdescript()}>{data.dashdescript}</p>
               </li>
             ))}
           </ul>
-          <div className='grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-6 gap-8'>
+          <div className='grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-6 gap-6'>
             <div className='2xl:col-span-4 p-4 md:p-6 rounded-md shadow-lg border-b border-in-cyan bg-gradient-to-br from-in-slate'>
-              <p className='uppercase font-medium pb-4'>Receita diária no período</p>
-              <ResponsiveContainer width="100%" height={450}>
+              <p className='uppercase font-medium pb-8'>Visão geral</p>
+              <ResponsiveContainer width="100%" height={350}>
                 <LineChart data={data}>
                   <CartesianGrid stroke={'#44475a'} vertical={false} />
                   <XAxis stroke={'#FFFFFF'} tickLine={false} axisLine={false} dataKey={'data'} dy={16} />
@@ -57,10 +55,10 @@ export const DashboardPage = () => {
               </ResponsiveContainer>
             </div>
             <div className='2xl:col-span-2 p-4 md:p-6 rounded-md shadow-lg border-b border-in-cyan bg-gradient-to-br from-in-slate'>
-              <p className='uppercase font-medium pb-4'>Mais vendidas no período</p>
-              <ResponsiveContainer width="100%" height={450}>
+              <p className='uppercase font-medium pb-8'>Vendas recentes</p>
+              <ResponsiveContainer width="100%" height={350}>
                 <PieChart>
-                  <Pie data={data2} dataKey={'amount'} nameKey={'product'} cx={'50%'} cy={'50%'} outerRadius={175} innerRadius={125} strokeWidth={10} stroke={'#2b2d39'} labelLine={false} label={({ cx, cy, midAngle, innerRadius, outerRadius, value, index }) => {
+                  <Pie data={data2} dataKey={'amount'} nameKey={'product'} cx={'50%'} cy={'50%'} outerRadius={150} innerRadius={100} strokeWidth={10} stroke={'#2b2d39'} labelLine={false} label={({ cx, cy, midAngle, innerRadius, outerRadius, value, index }) => {
                     const RADIAN = Math.PI / 180
                     const radius = 12 + innerRadius + (outerRadius - innerRadius)
                     const x = cx + radius * Math.cos(-midAngle * RADIAN)
