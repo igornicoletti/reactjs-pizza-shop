@@ -43,22 +43,22 @@ export const MenuVariants = tv({
 
 export const DashboardVariants = tv({
   slots: {
-    dashcontent: 'flex grow py-16',
-    dashwrapper: 'w-full flex flex-col gap-8',
+    dashcontent: 'flex grow py-8 md:py-16',
+    dashwrapper: 'w-full flex flex-col gap-4 md:gap-8',
     dashtitle: 'text-3xl',
-    dashguide: 'flex flex-col',
-    dashhcards: 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6',
-    dashhcard: 'flex flex-col items-end p-4 md:p-6 md:pb-4 rounded-md border-b-2 border-in-stone bg-gradient-to-t from-in-slate',
-    dashhinfo: 'text-in-cyan',
-    dashvalue: 'text-3xl pt-2 md:pt-4',
+    dashguide: 'flex flex-col gap-8',
+    dashhcards: 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8',
+    dashhcard: 'flex flex-col p-4 md:p-6 rounded-md shadow-lg border-b border-in-cyan bg-gradient-to-br from-in-slate',
+    dashhinfo: 'uppercase font-medium pb-4',
+    dashvalue: 'text-3xl',
     dashdescript: 'text-sm',
   }
 })
 
 export const OrderVariants = tv({
   slots: {
-    ordercontent: 'flex grow py-16',
-    orderwrapper: 'w-full flex flex-col gap-8',
+    ordercontent: 'flex grow py-8 md:py-16',
+    orderwrapper: 'w-full flex flex-col gap-4 md:gap-8',
     ordertitle: 'text-3xl',
     orderguide: 'flex flex-col gap-2',
     orderfilter: 'w-full sm:max-w-sm pb-2',
@@ -91,7 +91,7 @@ export const OrderVariants = tv({
 
 export const PaginationVariants = tv({
   slots: {
-    pagingcontent: 'flex flex-col sm:flex-row items-end sm:items-center justify-between gap-2',
+    pagingcontent: 'flex flex-col-reverse sm:flex-row items-end sm:items-center justify-between gap-2',
     pagingwrapper: 'flex items-center gap-4',
     paginginfo: 'text-sm',
     pagingnumb: 'font-semibold',
