@@ -3,14 +3,14 @@ import { DashboardVariants } from "../../styles/variants"
 
 const { dashcontent, dashwrapper, dashtitle, dashguide, dashhcards, dashhcard, dashhinfo, dashvalue, dashdescript } = DashboardVariants();
 
-const dashboardData = [
+const cardData = [
   { id: 1, title: "Pedidos", value: '38', dashdescript: "+20.1% em relação ao dia anterior", },
   { id: 2, title: "Vendas", value: '124', dashdescript: "+18.1% em relação ao mês passado", },
   { id: 3, title: "Cancelados", value: '12', dashdescript: "-8% em relação ao mês passado", },
   { id: 4, title: "Rendimento total", value: 'R$ 1448.60', dashdescript: "+38% em relação ao mês passado", },
 ]
 
-const data = [
+const lineChartData = [
   { data: '01/01', revenue: 1000 },
   { data: '02/02', revenue: 1245 },
   { data: '03/03', revenue: 3500 },
@@ -19,13 +19,14 @@ const data = [
   { data: '06/06', revenue: 1830 },
 ]
 
-const data2 = [
+const pieChartData = [
   { product: 'Pepperoni', amount: 40 },
   { product: 'Mussarrela', amount: 24 },
   { product: 'Pepperonilll', amount: 12 },
   { product: 'Mussum', amount: 8 },
 ]
-const COLORS = ['#8Be9fd', '#f472b6', '#c084fc', '#fde047']
+
+const pieChartColors = ['#8Be9fd', '#f472b6', '#c084fc', '#fde047']
 
 export const DashboardPage = () => {
   return (
@@ -34,7 +35,7 @@ export const DashboardPage = () => {
         <h1 className={dashtitle()}>Dashboard</h1>
         <div className={dashguide()}>
           <ul className={dashhcards()}>
-            {dashboardData.map((data) => (
+            {cardData.map((data) => (
               <li className={dashhcard()} key={data.id}>
                 <p className={dashhinfo()}>{data.title}</p>
                 <p className={dashvalue()}>{data.value}</p>
@@ -46,7 +47,7 @@ export const DashboardPage = () => {
             <div className='2xl:col-span-4 p-4 md:p-6 rounded-md shadow-lg border-b border-in-cyan bg-gradient-to-br from-in-slate'>
               <p className='uppercase font-medium pb-8'>Visão geral</p>
               <ResponsiveContainer width="100%" height={350}>
-                <LineChart data={data}>
+                <LineChart data={lineChartData}>
                   <CartesianGrid stroke={'#44475a'} vertical={false} />
                   <XAxis stroke={'#FFFFFF'} tickLine={false} axisLine={false} dataKey={'data'} dy={16} />
                   <YAxis stroke={'#FFFFFF'} tickLine={false} axisLine={false} tickFormatter={(value: number) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} />
@@ -58,19 +59,19 @@ export const DashboardPage = () => {
               <p className='uppercase font-medium pb-8'>Vendas recentes</p>
               <ResponsiveContainer width="100%" height={350}>
                 <PieChart>
-                  <Pie data={data2} dataKey={'amount'} nameKey={'product'} cx={'50%'} cy={'50%'} outerRadius={150} innerRadius={100} strokeWidth={10} stroke={'#2b2d39'} labelLine={false} label={({ cx, cy, midAngle, innerRadius, outerRadius, value, index }) => {
+                  <Pie data={pieChartData} dataKey={'amount'} nameKey={'product'} cx={'50%'} cy={'50%'} outerRadius={150} innerRadius={100} strokeWidth={10} stroke={'#2b2d39'} labelLine={false} label={({ cx, cy, midAngle, innerRadius, outerRadius, value, index }) => {
                     const RADIAN = Math.PI / 180
                     const radius = 12 + innerRadius + (outerRadius - innerRadius)
                     const x = cx + radius * Math.cos(-midAngle * RADIAN)
                     const y = cy + radius * Math.sin(-midAngle * RADIAN)
                     return <text fill={'#FFFFFF'} x={x} y={y} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline={'center'}>
-                      {data2[index].product.length > 12
-                        ? data2[index].product.substring(0, 12).concat('... ')
-                        : data2[index].product}{' '}
+                      {pieChartData[index].product.length > 12
+                        ? pieChartData[index].product.substring(0, 12).concat('... ')
+                        : pieChartData[index].product}{' '}
                       {value}
                     </text>
                   }}>
-                    {data2.map((_, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
+                    {pieChartData.map((_, index) => <Cell key={index} fill={pieChartColors[index % pieChartColors.length]} />)}
                   </Pie>
                 </PieChart>
               </ResponsiveContainer>
