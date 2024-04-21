@@ -48,7 +48,7 @@ export const DashboardVariants = tv({
     dashtitle: 'text-3xl',
     dashguide: 'flex flex-col gap-6',
     dashhcards: 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6',
-    dashhcard: 'flex flex-col p-4 rounded-md shadow-lg border-b border-in-cyan bg-gradient-to-br from-in-slate',
+    dashhcard: 'flex flex-col p-4 rounded-md shadow-lg border-b-2 border-in-cyan bg-gradient-to-br from-in-slate',
     dashhinfo: 'font-medium pb-2',
     dashvalue: 'text-3xl font-semibold',
     dashdescript: 'text-sm',
