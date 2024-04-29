@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form'
-import { Form, Link, useNavigate } from 'react-router-dom'
+import { Form, Link, redirect } from 'react-router-dom'
 
 import { AuthVariants, FormVariants } from '../../styles/variants'
 
 const { formcontent, formgroup, forminput, formlabel, formerror, formaction } = FormVariants()
-const { authcontent, authwrapper, authhead, authtitle, authdescript, authlink } = AuthVariants()
+const { authcontent, authwrapper, authtitle, authdescript, authlink } = AuthVariants()
 
 type FormProps = {
   name: string
@@ -12,24 +12,18 @@ type FormProps = {
 }
 
 export const SignUpPage = () => {
-  const navigate = useNavigate()
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<FormProps>()
+  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<FormProps>()
 
   const handleSubmitForm = async (data: FormProps) => {
     console.log(data)
-    navigate('/')
+    redirect('/signin')
     reset()
   }
 
   return (
     <div className={authcontent()}>
       <div className={authwrapper()}>
-        <div className={authhead()}>
-          <h1 className={authtitle()}>Cadastre-se</h1>
-          <p className={authdescript()}>Já tem uma conta?
-            {' '}<Link to={'/'} className={authlink()}>Entrar.</Link>
-          </p>
-        </div>
+        <h1 className={authtitle()}>Cadastre-se</h1>
         <Form className={formcontent()} onSubmit={handleSubmit(handleSubmitForm)}>
           <div className={formgroup()}>
             <input className={forminput()} type='text' id='name' placeholder=' '
@@ -43,8 +37,9 @@ export const SignUpPage = () => {
             <label className={formlabel()} htmlFor='email'>E-mail</label>
             {errors.email && <span className={formerror()}>{errors.email.message}</span>}
           </div>
-          <button className={formaction()} disabled={isSubmitting} type="submit">Cadastrar</button>
+          <button className={formaction()} disabled={!watch('name') || !watch('email')} type="submit">Cadastrar</button>
         </Form>
+        <p className={authdescript()}>Já tem uma conta?{' '}<Link to={'/signin'} className={authlink()}>Entrar.</Link></p>
       </div>
     </div>
   )

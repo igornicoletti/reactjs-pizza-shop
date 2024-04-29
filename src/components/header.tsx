@@ -10,8 +10,8 @@ const { scaleenter, scaleenterto, scalefrom, scaleleave, scaleleavefrom, scalele
 const { headercontent, headerwrapper, headerlf, headerlogo, headeritems, headeritem, headericon } = HeaderVariants()
 
 const menuData = [
-  { id: 1, icon: PanelsTopLeftIcon, ancor: 'dashboard', title: 'Dashboard' },
-  { id: 2, icon: SquareGanttChartIcon, ancor: 'order', title: 'Pedidos' },
+  { id: 1, icon: PanelsTopLeftIcon, ancor: '/app/dashboard', title: 'Dashboard' },
+  { id: 2, icon: SquareGanttChartIcon, ancor: '/app/order', title: 'Pedidos' },
   { id: 3, icon: SettingsIcon, ancor: '/', title: 'Configurações' },
   { id: 4, icon: LogOutIcon, ancor: '/', title: 'Sair' }
 ]
@@ -33,7 +33,7 @@ export const HeaderComponent = () => {
         </div>
         <Menu className={menucontent()} as={'div'}>
           <Menu.Button className={menuaction()}>
-            <span>Igor Nicoletti</span>
+            <span>igornicoletti@outlook.com</span>
             <ChevronDownIcon className={menudownicon()} aria-hidden={true} />
           </Menu.Button>
           <Transition as={Fragment}

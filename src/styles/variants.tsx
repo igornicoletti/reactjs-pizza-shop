@@ -9,12 +9,22 @@ export const RootVariants = tv({
 
 export const AuthVariants = tv({
   slots: {
-    authcontent: 'flex grow items-center xl:items-start justify-center py-16',
-    authwrapper: 'w-full sm:max-w-md flex flex-col gap-12 xl:pt-48',
-    authhead: 'flex flex-col items-center gap-2',
-    authtitle: 'uppercase text-4xl',
-    authdescript: 'md:text-lg',
-    authlink: 'underline underline-offset-4 decoration-1 hover:decoration-2 decoration-in-cyan transition ease-in-out duration-300',
+    authcontent: 'flex grow items-center justify-center py-16',
+    authwrapper: 'w-full sm:max-w-sm flex flex-col gap-4',
+    authtitle: 'text-2xl font-medium',
+    authdescript: 'text-center pt-6',
+    authlink: 'font-medium underline underline-offset-4 decoration-1 hover:decoration-2 decoration-in-cyan transition ease-in-out duration-300',
+  }
+})
+
+export const FormVariants = tv({
+  slots: {
+    formcontent: 'flex flex-col gap-4',
+    formgroup: 'relative h-12',
+    forminput: 'w-full h-full px-4 rounded-md peer border border-in-stone hover:border-in-white focus:border-in-cyan bg-transparent focus:outline-none invalid:border-in-red hover:invalid:border-in-red focus:invalid:border-in-red transition ease-in-out duration-300',
+    formlabel: 'absolute top-3 left-px px-4 bg-in-dark text-in-cyan peer-focus:text-in-cyan peer-placeholder-shown:text-in-white peer-invalid:text-in-red peer-focus:peer-invalid:text-in-red scale-75 peer-focus:scale-75 peer-placeholder-shown:scale-100 transform -translate-y-5 peer-focus:-translate-y-5 peer-placeholder-shown:translate-y-0 transition ease-in-out duration-300',
+    formerror: 'absolute -bottom-2 right-2 px-4 bg-in-dark text-in-white text-xs',
+    formaction: 'flex items-center justify-center h-12 py-2 px-6 font-semibold rounded-md border border-in-cyan bg-in-cyan text-in-dark disabled:cursor-not-allowed focus:outline-none transform disabled:scale-100 active:scale-90 transition ease-in-out duration-300',
   }
 })
 
@@ -33,7 +43,7 @@ export const HeaderVariants = tv({
 export const MenuVariants = tv({
   slots: {
     menucontent: 'relative z-10',
-    menuaction: 'flex items-center gap-2 uppercase hover:text-in-cyan focus:outline-none group transition ease-in-out duration-300',
+    menuaction: 'flex items-center gap-2 hover:text-in-cyan focus:outline-none group transition ease-in-out duration-300',
     menudownicon: 'size-4 shrink-0 group-aria-[expanded=true]:-rotate-180 transform transition ease-in-out duration-300',
     menuitems: 'absolute origin-top-right right-0 w-60 flex flex-col gap-2 p-2 mt-2 rounded-md shadow-lg bg-in-slate focus:outline-none',
     menuitem: 'flex sm:[&:nth-child(1)]:hidden sm:[&:nth-child(2)]:hidden items-center gap-2 p-2 rounded-md hover:bg-in-cyan hover:text-in-dark focus:outline-none group transition ease-in-out duration-300',
@@ -67,7 +77,7 @@ export const OrderVariants = tv({
     orderthead: 'lg:border-x-2 border-in-cyan',
     ordertbody: 'divide-y-2 divide-in-dark',
     orderrow: '*:whitespace-nowrap *:px-4 *:py-3 first:*:text-center last:*:text-center',
-    orderstatus: 'px-2 rounded-full text-xs md:text-sm font-medium bg-in-cyan/5 border border-in-cyan text-in-cyan',
+    orderstatus: 'px-2 py-1 rounded-full text-xs md:text-sm font-medium bg-in-cyan/5 border border-in-cyan text-in-cyan',
     ordersteps: 'flex items-center justify-center gap-2',
     orderaction: 'relative px-2 group hover:text-in-cyan focus:outline-none transition ease-in-out duration-300',
     ordericon: 'size-4 shrink-0',
@@ -98,17 +108,6 @@ export const PaginationVariants = tv({
     paginggroup: 'flex items-center gap-1',
     pagingaction: 'p-2 rounded-md border border-in-stone hover:bg-in-slate hover:border-in-cyan hover:text-in-cyan focus:outline-none group transition ease-in-out duration-300',
     pagingicon: 'size-4',
-  }
-})
-
-export const FormVariants = tv({
-  slots: {
-    formcontent: 'flex flex-col gap-4',
-    formgroup: 'relative h-12',
-    forminput: 'w-full h-full px-4 rounded-md peer border border-in-stone hover:border-in-white focus:border-in-cyan bg-transparent focus:outline-none invalid:border-in-red hover:invalid:border-in-red focus:invalid:border-in-red transition ease-in-out duration-300',
-    formlabel: 'absolute top-3 left-px px-4 bg-in-dark text-in-cyan peer-focus:text-in-cyan peer-placeholder-shown:text-in-white peer-invalid:text-in-red peer-focus:peer-invalid:text-in-red scale-75 peer-focus:scale-75 peer-placeholder-shown:scale-100 transform -translate-y-5 peer-focus:-translate-y-5 peer-placeholder-shown:translate-y-0 transition ease-in-out duration-300',
-    formerror: 'absolute -bottom-2 right-2 px-4 bg-in-dark text-in-white text-xs',
-    formaction: 'flex items-center justify-center h-12 py-2 px-6 uppercase rounded-md border border-in-cyan bg-in-cyan text-in-dark disabled:cursor-not-allowed focus:outline-none transform transition ease-in-out duration-300',
   }
 })
 
