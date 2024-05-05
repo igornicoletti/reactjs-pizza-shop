@@ -73,16 +73,16 @@ export const OrderPage = () => {
                     <td>{data.min}</td>
                     <td>
                       {data.status === 'Pendente' && <span className={orderstatus()}>Pendente</span>}
-                      {data.status === 'Concluído' && <span className={orderstatus({ color: 'finished' })}>Concluído</span>}
+                      {data.status === 'Concluído' && <span className={orderstatus({ color: 'concluded' })}>Concluído</span>}
                       {data.status === 'Cancelado' && <span className={orderstatus({ color: 'canceled' })}>Cancelado</span>}
                     </td>
                     <td>{data.name}</td>
                     <td>{intlNumberFormat.format(data.total)}</td>
                     <td>
                       <div className={ordersteps()}>
-                        <button className={orderaction({ color: 'finished' })}>
+                        <button className={orderaction({ color: 'concluded' })}>
                           <CheckIcon className={ordericon()} aria-hidden={true} />
-                          <p className={ordertooltip({ color: 'finished' })}>Concluir</p>
+                          <p className={ordertooltip({ color: 'concluded' })}>Concluir</p>
                         </button>
                         <button className={orderaction({ color: 'canceled' })}>
                           <XIcon className={ordericon()} aria-hidden={true} />

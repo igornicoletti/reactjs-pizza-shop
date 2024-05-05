@@ -20,9 +20,9 @@ export const AuthVariants = tv({
 export const FormVariants = tv({
   slots: {
     formcontent: 'flex flex-col gap-4',
-    formgroup: 'relative h-12',
-    forminput: 'w-full h-full px-4 rounded-md peer border border-in-stone hover:border-in-white focus:border-in-cyan bg-transparent focus:outline-none invalid:border-in-red hover:invalid:border-in-red focus:invalid:border-in-red transition ease-in-out duration-300',
-    formlabel: 'absolute top-3 left-px px-4 bg-in-dark text-in-cyan peer-focus:text-in-cyan peer-placeholder-shown:text-in-white peer-invalid:text-in-red peer-focus:peer-invalid:text-in-red scale-75 peer-focus:scale-75 peer-placeholder-shown:scale-100 transform -translate-y-5 peer-focus:-translate-y-5 peer-placeholder-shown:translate-y-0 transition ease-in-out duration-300',
+    formgroup: 'relative',
+    forminput: 'w-full h-12 px-4 rounded-md peer border border-in-stone hover:border-in-white focus:border-in-cyan bg-transparent focus:outline-none invalid:border-in-red hover:invalid:border-in-red focus:invalid:border-in-red transition ease-in-out duration-300',
+    formlabel: 'absolute top-3 left-px px-4 font-medium bg-in-dark text-in-cyan peer-focus:text-in-cyan peer-placeholder-shown:text-in-white peer-invalid:text-in-red peer-focus:peer-invalid:text-in-red scale-75 peer-focus:scale-75 peer-placeholder-shown:scale-100 transform -translate-y-5 peer-focus:-translate-y-5 peer-placeholder-shown:translate-y-0 transition ease-in-out duration-300',
     formerror: 'absolute -bottom-2 right-2 px-4 bg-in-dark text-in-white text-xs',
     formaction: 'flex items-center justify-center h-12 py-2 px-6 font-semibold rounded-md border border-in-cyan bg-in-cyan text-in-dark disabled:cursor-not-allowed focus:outline-none transform disabled:scale-100 active:scale-90 transition ease-in-out duration-300',
   }
@@ -77,7 +77,7 @@ export const OrderVariants = tv({
     orderthead: 'lg:border-x-2 border-in-cyan',
     ordertbody: 'divide-y-2 divide-in-dark',
     orderrow: '*:whitespace-nowrap *:px-4 *:py-3 first:*:text-center last:*:text-center',
-    orderstatus: 'px-2 py-1 rounded-full text-xs md:text-sm font-medium bg-in-cyan/5 border border-in-cyan text-in-cyan',
+    orderstatus: 'px-2 py-1 rounded-full text-xs md:text-sm font-medium bg-in-cyan/10 text-in-cyan',
     ordersteps: 'flex items-center justify-center gap-2',
     orderaction: 'relative px-2 group hover:text-in-cyan focus:outline-none transition ease-in-out duration-300',
     ordericon: 'size-4 shrink-0',
@@ -85,13 +85,13 @@ export const OrderVariants = tv({
   },
   variants: {
     color: {
-      finished: {
-        orderstatus: 'bg-in-green/5 border border-in-green text-in-green',
+      concluded: {
+        orderstatus: 'bg-in-green/10 text-in-green',
         orderaction: 'hover:text-in-green',
         ordertooltip: 'border-in-green',
       },
       canceled: {
-        orderstatus: 'bg-in-red/5 border border-in-red text-in-red',
+        orderstatus: 'bg-in-red/10 text-in-red',
         orderaction: 'hover:text-in-red',
         ordertooltip: 'border-in-red',
       },
@@ -133,6 +133,25 @@ export const ModalVariants = tv({
   }
 })
 
+export const NotifyVariants = tv({
+  slots: {
+    notifycontent: 'fixed inset-0 flex items-end sm:items-start sm:px-6 sm:py-10 p-6 z-10 pointer-events-none',
+    notifywrapper: 'w-full flex flex-col items-center sm:items-end',
+    notifypanel: 'w-full max-w-md flex items-center gap-2 px-4 py-3 rounded-md shadow-lg bg-in-slate border-b-2 border-b-in-cyan',
+    notifytitle: 'font-medium',
+  },
+  variants: {
+    color: {
+      success: {
+        notifypanel: 'border-b-in-green'
+      },
+      error: {
+        notifypanel: 'border-b-in-red'
+      }
+    }
+  }
+})
+
 export const OpacityVariants = tv({
   slots: {
     opacityenter: 'transition ease-out duration-100',
@@ -152,5 +171,16 @@ export const ScaleVariants = tv({
     scaleleave: 'transition ease-in duration-75',
     scaleleavefrom: 'transform opacity-100 scale-100',
     scaleleaveto: 'transform opacity-0 scale-95',
+  }
+})
+
+export const TranslateVariants = tv({
+  slots: {
+    translateenter: 'transition ease-out duration-100',
+    translatefrom: 'transform opacity-0 translate-y-2 sm:translate-y-0 sm:translate-x-2',
+    translateenterto: 'transform opacity-100 translate-y-0 sm:translate-x-0',
+    translateleave: 'transition ease-in duration-75',
+    translateleavefrom: 'transform opacity-100',
+    translateleaveto: 'transform opacity-0',
   }
 })

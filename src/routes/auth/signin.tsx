@@ -1,9 +1,11 @@
 import { useForm } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
-import { Form, Link, redirect } from 'react-router-dom'
+import { Form, Link, useNavigate } from 'react-router-dom'
 
 import { SignInApi } from '../../api/signin'
 import { AuthVariants, FormVariants } from '../../styles/variants'
+import { NotifyContextProvider } from '../../context/notify'
+import { NotifyComponent } from '../../components/notify'
 
 const { authcontent, authwrapper, authtitle, authdescript, authlink } = AuthVariants()
 const { formcontent, formgroup, forminput, formlabel, formerror, formaction } = FormVariants()
@@ -13,16 +15,24 @@ type FormProps = {
 }
 
 export const SignInPage = () => {
+  const navigate = useNavigate()
+  const { notify } = NotifyContextProvider()
+
+  const { mutateAsync: authenticate } = useMutation({ mutationFn: SignInApi })
   const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<FormProps>()
 
-  const { mutateAsync: authenticate } = useMutation({
-    mutationFn: SignInApi
-  })
-
   const handleSubmitForm = async (data: FormProps) => {
-    await authenticate({ email: data.email })
-    redirect('/app/dashboard')
-    reset()
+    try {
+      await authenticate({ email: data.email })
+      notify.expand = true
+      navigate('/app/dashboard')
+      reset()
+    } catch {
+      notify.expand = true
+      notify.status = 'error'
+      notify.message = '401 Unauthorized'
+      reset()
+    }
   }
 
   return (
@@ -40,6 +50,7 @@ export const SignInPage = () => {
         </Form>
         <p className={authdescript()}>Não tem uma conta?{' '}<Link to={'/signup'} className={authlink()}>Cadastre-se.</Link></p>
       </div>
+      <NotifyComponent notify={notify} />
     </div>
   )
 }

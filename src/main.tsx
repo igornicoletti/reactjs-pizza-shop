@@ -4,8 +4,10 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import './index.css'
+
 import { ErrorPage } from './error'
 import { OrderLoader } from './data/order'
+import { NotifyProvider } from './context/notify'
 
 import { AuthPage } from './routes/auth/root'
 import { SignInPage } from './routes/auth/signin'
@@ -24,11 +26,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/signin?',
+        path: 'signin?',
         element: <SignInPage />
       },
       {
-        path: '/signup',
+        path: 'signup',
         element: <SignUpPage />
       }
     ]
@@ -54,7 +56,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <NotifyProvider>
+        <RouterProvider router={router} />
+      </NotifyProvider>
     </QueryClientProvider>
   </React.StrictMode>
 )
