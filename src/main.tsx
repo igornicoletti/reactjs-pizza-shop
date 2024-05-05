@@ -7,7 +7,6 @@ import './index.css'
 
 import { ErrorPage } from './error'
 import { OrderLoader } from './data/order'
-import { NotifyProvider } from './context/notify'
 
 import { AuthPage } from './routes/auth/root'
 import { SignInPage } from './routes/auth/signin'
@@ -56,9 +55,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <NotifyProvider>
         <RouterProvider router={router} />
-      </NotifyProvider>
     </QueryClientProvider>
   </React.StrictMode>
 )
