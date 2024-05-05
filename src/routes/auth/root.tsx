@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
-import { NotifyProvider } from './context/notify'
+import { NotifyProvider } from '../../context/notify'
 import { RootVariants } from '../../styles/variants'
 
 const { rootlayout, rootcontainer } = RootVariants()
