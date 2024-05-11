@@ -55,10 +55,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <NotifyProvider>
+    <NotifyProvider>
+      <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
-      </NotifyProvider>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </NotifyProvider>
   </React.StrictMode>
 )

@@ -135,10 +135,13 @@ export const ModalVariants = tv({
 
 export const NotifyVariants = tv({
   slots: {
-    notifycontent: 'fixed inset-0 flex items-end sm:items-start sm:px-6 sm:py-10 p-6 z-10 pointer-events-none',
+    notifycontent: 'pointer-events-none fixed inset-0 flex items-end sm:items-start sm:px-6 sm:py-10 p-6 z-10',
     notifywrapper: 'w-full flex flex-col items-center sm:items-end',
-    notifypanel: 'w-full max-w-md flex items-center gap-2 px-4 py-3 rounded-md shadow-lg bg-in-slate border-b-2 border-b-in-cyan',
-    notifytitle: 'font-medium',
+    notifypanel: 'pointer-events-auto relative w-full max-w-md flex flex-col gap-1 px-4 py-3 rounded-md shadow-lg bg-in-slate border-b-2 border-b-in-cyan',
+    notifytitle: 'font-semibold',
+    notifyinfo: 'font-semibold text-sm',
+    notifyaction: 'absolute top-0 right-0 p-3 group',
+    notifyicon: 'size-4 shrink-0 text-in-white/50 group-hover:text-in-white transition ease-in-out duration-300',
   },
   variants: {
     color: {
@@ -177,10 +180,10 @@ export const ScaleVariants = tv({
 export const TranslateVariants = tv({
   slots: {
     translateenter: 'transition ease-out duration-100',
-    translatefrom: 'transform opacity-0 translate-y-2 sm:translate-y-0 sm:translate-x-2',
-    translateenterto: 'transform opacity-100 translate-y-0 sm:translate-x-0',
+    translatefrom: 'transform translate-y-2 sm:translate-y-0 sm:translate-x-2',
+    translateenterto: 'transform translate-y-0 sm:translate-x-0',
     translateleave: 'transition ease-in duration-75',
-    translateleavefrom: 'transform opacity-100',
-    translateleaveto: 'transform opacity-0',
+    translateleavefrom: 'transform translate-y-0 sm:translate-x-0',
+    translateleaveto: 'transform translate-y-2 sm:translate-y-0 sm:translate-x-2',
   }
 })

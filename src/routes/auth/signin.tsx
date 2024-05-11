@@ -1,11 +1,10 @@
 import { useForm } from 'react-hook-form'
+import { Form, Link } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
-import { Form, Link, useNavigate } from 'react-router-dom'
 
 import { SignInApi } from '../../api/signin'
-import { AuthVariants, FormVariants } from '../../styles/variants'
 import { NotifyContextProvider } from '../../context/notify'
-import { NotifyComponent } from '../../components/notify'
+import { AuthVariants, FormVariants } from '../../styles/variants'
 
 const { authcontent, authwrapper, authtitle, authdescript, authlink } = AuthVariants()
 const { formcontent, formgroup, forminput, formlabel, formerror, formaction } = FormVariants()
@@ -15,7 +14,6 @@ type FormProps = {
 }
 
 export const SignInPage = () => {
-  const navigate = useNavigate()
   const { notify } = NotifyContextProvider()
 
   const { mutateAsync: authenticate } = useMutation({ mutationFn: SignInApi })
@@ -24,14 +22,19 @@ export const SignInPage = () => {
   const handleSubmitForm = async (data: FormProps) => {
     try {
       await authenticate({ email: data.email })
-      notify.expand = true
-      navigate('/app/dashboard')
       reset()
+      notify({
+        status: 'success',
+        message: 'E-mail enviado!',
+        description: `Um link de autenticação foi enviado para ${data.email}`
+      })
     } catch {
-      notify.expand = true
-      notify.status = 'error'
-      notify.message = '401 Unauthorized'
       reset()
+      notify({
+        status: 'error',
+        message: 'Credenciais inválidas!',
+        description: `${data.email} não correspondem aos nossos registros.`
+      })
     }
   }
 
@@ -50,7 +53,6 @@ export const SignInPage = () => {
         </Form>
         <p className={authdescript()}>Não tem uma conta?{' '}<Link to={'/signup'} className={authlink()}>Cadastre-se.</Link></p>
       </div>
-      <NotifyComponent notify={notify} />
     </div>
   )
 }

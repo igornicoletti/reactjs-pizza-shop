@@ -3,8 +3,8 @@ import { Form, Link, redirect } from 'react-router-dom'
 
 import { AuthVariants, FormVariants } from '../../styles/variants'
 
-const { formcontent, formgroup, forminput, formlabel, formerror, formaction } = FormVariants()
 const { authcontent, authwrapper, authtitle, authdescript, authlink } = AuthVariants()
+const { formcontent, formgroup, forminput, formlabel, formerror, formaction } = FormVariants()
 
 type FormProps = {
   name: string
