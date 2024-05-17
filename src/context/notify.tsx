@@ -1,31 +1,36 @@
 import { ReactNode, createContext, useContext, useState } from 'react'
-import { NotifyComponent } from '../components/notify'
 
 type NotifyProps = {
-  message: string
-  description?: string
-  status: '' | 'success' | 'error'
+  id: number
+  title: string
+  description: string
+  type: 'success' | 'error' | 'warning' | 'info'
 }
 
-type NotifyContextType = {
-  notify: (data: NotifyProps) => void
+type NotifyContextProps = {
+  notify: NotifyProps[]
+  handleAddNotify: (data: Omit<NotifyProps, 'id'>) => void
+  handleRemoveNotify: (data: NotifyProps['id']) => void
 }
 
-export const NotifyContext = createContext({} as NotifyContextType)
+const NotifyContext = createContext({} as NotifyContextProps)
 
-export const NotifyProvider = ({ children }: { children: ReactNode }) => {
-  const [currentNotify, setCurrentNotify] = useState<NotifyProps>({ message: '', description: '', status: '' })
+export const NotifyContextProvider = ({ children }: { children: ReactNode }) => {
+  const [currentNotify, setCurrentNotify] = useState<NotifyProps[]>([])
 
-  const notify = ({ message, description, status }: NotifyProps) => {
-    setCurrentNotify({ message, description, status })
+  const handleAddNotify = ({ title, description, type }: Omit<NotifyProps, 'id'>) => {
+    setCurrentNotify((state) => [...state, { id: Date.now(), title, description, type }])
+  }
+
+  const handleRemoveNotify = (id: NotifyProps['id']) => {
+    setCurrentNotify((state) => state.filter((item) => item.id !== id))
   }
 
   return (
-    <NotifyContext.Provider value={{ notify }}>
+    <NotifyContext.Provider value={{ notify: currentNotify, handleAddNotify, handleRemoveNotify }}>
       {children}
-      <NotifyComponent {...currentNotify} />
     </NotifyContext.Provider>
   )
 }
 
-export const NotifyContextProvider = () => useContext(NotifyContext)
+export const UseNotify = () => useContext(NotifyContext)

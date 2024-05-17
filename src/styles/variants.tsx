@@ -136,10 +136,10 @@ export const ModalVariants = tv({
 export const NotifyVariants = tv({
   slots: {
     notifycontent: 'pointer-events-none fixed inset-0 flex items-end sm:items-start sm:px-6 sm:py-10 p-6 z-10',
-    notifywrapper: 'w-full flex flex-col items-center sm:items-end',
-    notifypanel: 'pointer-events-auto relative w-full max-w-md flex flex-col gap-1 px-4 py-3 rounded-md shadow-lg bg-in-slate border-b-2 border-b-in-cyan',
+    notifywrapper: 'w-full flex flex-col gap-4 items-center sm:items-end',
+    notifypanel: 'pointer-events-auto relative w-full max-w-md flex flex-col gap-1 p-4 rounded-md shadow-lg bg-in-slate border-b-4 border-b-in-cyan',
     notifytitle: 'font-semibold',
-    notifyinfo: 'font-semibold text-sm',
+    notifyinfo: 'font-medium text-sm',
     notifyaction: 'absolute top-0 right-0 p-3 group',
     notifyicon: 'size-4 shrink-0 text-in-white/50 group-hover:text-in-white transition ease-in-out duration-300',
   },
@@ -150,6 +150,12 @@ export const NotifyVariants = tv({
       },
       error: {
         notifypanel: 'border-b-in-red'
+      },
+      warning: {
+        notifypanel: 'border-b-in-orange'
+      },
+      info: {
+        notifypanel: 'border-b-in-yellow'
       }
     }
   }
@@ -157,10 +163,10 @@ export const NotifyVariants = tv({
 
 export const OpacityVariants = tv({
   slots: {
-    opacityenter: 'transition ease-out duration-100',
+    opacityenter: 'transition ease-out duration-300',
     opacityfrom: 'transform opacity-0',
     opacityenterto: 'transform opacity-100',
-    opacityleave: 'transition ease-in duration-75',
+    opacityleave: 'transition ease-in duration-200',
     opacityleavefrom: 'transform opacity-100',
     opacityleaveto: 'transform opacity-0',
   }
@@ -168,10 +174,10 @@ export const OpacityVariants = tv({
 
 export const ScaleVariants = tv({
   slots: {
-    scaleenter: 'transition ease-out duration-100',
+    scaleenter: 'transition ease-out duration-300',
     scalefrom: 'transform opacity-0 scale-95',
     scaleenterto: 'transform opacity-100 scale-100',
-    scaleleave: 'transition ease-in duration-75',
+    scaleleave: 'transition ease-in duration-200',
     scaleleavefrom: 'transform opacity-100 scale-100',
     scaleleaveto: 'transform opacity-0 scale-95',
   }
@@ -179,11 +185,11 @@ export const ScaleVariants = tv({
 
 export const TranslateVariants = tv({
   slots: {
-    translateenter: 'transition ease-out duration-100',
-    translatefrom: 'transform translate-y-2 sm:translate-y-0 sm:translate-x-2',
+    translateenter: 'transition ease-out duration-300',
+    translatefrom: 'transform translate-y-4 sm:translate-y-0 sm:translate-x-4',
     translateenterto: 'transform translate-y-0 sm:translate-x-0',
-    translateleave: 'transition ease-in duration-75',
+    translateleave: 'transition ease-in duration-200',
     translateleavefrom: 'transform translate-y-0 sm:translate-x-0',
-    translateleaveto: 'transform translate-y-2 sm:translate-y-0 sm:translate-x-2',
+    translateleaveto: 'transform translate-y-4 sm:translate-y-0 sm:translate-x-4',
   }
 })

@@ -7,7 +7,6 @@ import './index.css'
 
 import { ErrorPage } from './error'
 import { OrderLoader } from './data/order'
-import { NotifyProvider } from './context/notify'
 
 import { AuthPage } from './routes/auth/root'
 import { SignInPage } from './routes/auth/signin'
@@ -16,6 +15,8 @@ import { SignUpPage } from './routes/auth/signup'
 import { AppPage } from './routes/app/root'
 import { OrderPage } from './routes/app/order'
 import { DashboardPage } from './routes/app/dashboard'
+
+import { NotifyContextProvider } from './context/notify'
 
 const queryClient = new QueryClient()
 
@@ -55,10 +56,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <NotifyProvider>
+    <NotifyContextProvider>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
       </QueryClientProvider>
-    </NotifyProvider>
+    </NotifyContextProvider>
   </React.StrictMode>
 )

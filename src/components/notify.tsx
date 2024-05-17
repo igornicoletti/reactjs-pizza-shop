@@ -1,47 +1,35 @@
+import { Fragment } from 'react'
 import { XIcon } from 'lucide-react'
 import { Transition } from '@headlessui/react'
-import { Fragment, useEffect, useState } from 'react'
 
+import { UseNotify } from '../context/notify'
 import { NotifyVariants, TranslateVariants } from '../styles/variants'
 
 const { notifycontent, notifywrapper, notifypanel, notifytitle, notifyinfo, notifyaction, notifyicon } = NotifyVariants()
 const { translateenter, translatefrom, translateenterto, translateleave, translateleavefrom, translateleaveto } = TranslateVariants()
 
-type Props = {
-  message: string
-  description?: string
-  status: '' | 'success' | 'error'
-}
-
-export const NotifyComponent = ({ message, description, status }: Props) => {
-  const [currentNotify, setCurrentNotify] = useState<boolean>(false)
-
-  useEffect(() => {
-    if (status) {
-      setCurrentNotify(true)
-      setTimeout(() => setCurrentNotify(false), 5000)
-    }
-  }, [status])
+export const NotifyComponent = () => {
+  const { notify, handleRemoveNotify } = UseNotify()
 
   return (
     <>
-      {currentNotify && (
-        <div className={notifycontent()}>
-          <div className={notifywrapper()}>
-            <Transition as={Fragment} show={currentNotify}
+      <div className={notifycontent()}>
+        <div className={notifywrapper()}>
+          {notify.map((notify) => (
+            <Transition as={Fragment} show={true} key={notify.id}
               enter={translateenter()} enterFrom={translatefrom()} enterTo={translateenterto()}
               leave={translateleave()} leaveFrom={translateleavefrom()} leaveTo={translateleaveto()}>
-              <div className={notifypanel(status === 'success' ? { color: 'success' } : { color: 'error' })}>
-                <p className={notifytitle()}>{message}</p>
-                {description && <p className={notifyinfo()}>{description}</p>}
-                <button className={notifyaction()} onClick={() => setCurrentNotify(false)}>
+              <div className={notifypanel({ color: notify.type })}>
+                <p className={notifytitle()}>{notify.title}</p>
+                <p className={notifyinfo()}>{notify.description}</p>
+                <button className={notifyaction()} onClick={() => handleRemoveNotify(notify.id)}>
                   <XIcon className={notifyicon()} />
                 </button>
               </div>
             </Transition>
-          </div>
+          ))}
         </div>
-      )}
+      </div>
     </>
   )
 }

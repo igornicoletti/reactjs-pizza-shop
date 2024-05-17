@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form'
-import { Form, Link } from 'react-router-dom'
+import { Form, Link, useSearchParams } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 
 import { SignInApi } from '../../api/signin'
-import { NotifyContextProvider } from '../../context/notify'
+import { UseNotify } from '../../context/notify'
 import { AuthVariants, FormVariants } from '../../styles/variants'
 
 const { authcontent, authwrapper, authtitle, authdescript, authlink } = AuthVariants()
@@ -14,27 +14,30 @@ type FormProps = {
 }
 
 export const SignInPage = () => {
-  const { notify } = NotifyContextProvider()
+  const [searchParams] = useSearchParams()
 
+  const { handleAddNotify } = UseNotify()
   const { mutateAsync: authenticate } = useMutation({ mutationFn: SignInApi })
-  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<FormProps>()
+  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<FormProps>({
+    defaultValues: { email: searchParams.get('email') ?? '' }
+  })
 
   const handleSubmitForm = async (data: FormProps) => {
     try {
       await authenticate({ email: data.email })
-      reset()
-      notify({
-        status: 'success',
-        message: 'E-mail enviado!',
-        description: `Um link de autenticação foi enviado para ${data.email}`
+      handleAddNotify({
+        type: 'success',
+        title: 'Verifique seu e-mail!',
+        description: `Um link de autenticação foi enviado para o e-mail ${data.email}.`
       })
+      reset()
     } catch {
-      reset()
-      notify({
-        status: 'error',
-        message: 'Credenciais inválidas!',
-        description: `${data.email} não correspondem aos nossos registros.`
+      handleAddNotify({
+        type: 'error',
+        title: 'Credenciais inválidas!',
+        description: `${data.email} não correspondem aos nossos registros. Cadastre-se.`
       })
+      reset()
     }
   }
 

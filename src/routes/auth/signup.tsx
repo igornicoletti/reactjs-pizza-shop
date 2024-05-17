@@ -1,6 +1,9 @@
 import { useForm } from 'react-hook-form'
-import { Form, Link, redirect } from 'react-router-dom'
+import { useMutation } from '@tanstack/react-query'
+import { Form, Link, useNavigate } from 'react-router-dom'
 
+import { SignUpApi } from '../../api/signup'
+import { UseNotify } from '../../context/notify'
 import { AuthVariants, FormVariants } from '../../styles/variants'
 
 const { authcontent, authwrapper, authtitle, authdescript, authlink } = AuthVariants()
@@ -12,12 +15,30 @@ type FormProps = {
 }
 
 export const SignUpPage = () => {
+  const navigate = useNavigate()
+
+  const { handleAddNotify } = UseNotify()
+  const { mutateAsync: subscribe } = useMutation({ mutationFn: SignUpApi })
   const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<FormProps>()
 
   const handleSubmitForm = async (data: FormProps) => {
-    console.log(data)
-    redirect('/signin')
-    reset()
+    try {
+      await subscribe({ name: data.name, email: data.email })
+      handleAddNotify({
+        type: 'success',
+        title: `Cadastro realizado!`,
+        description: `Acesse com o e-mail ${data.email} para receber um link de autenticação.`
+      })
+      navigate(`/signin?email=${data.email}`)
+      reset()
+    } catch {
+      handleAddNotify({
+        type: 'warning',
+        title: `Credenciais existentes!`,
+        description: `${data.email} já existe em nossos registros. Cadastre um novo e-mail.`
+      })
+      reset()
+    }
   }
 
   return (
