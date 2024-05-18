@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form'
-import { Form, Link, useSearchParams } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
+import { Form, Link, useSearchParams } from 'react-router-dom'
 
 import { SignInApi } from '../../api/signin'
-import { UseNotify } from '../../context/notify'
+import { UseToast } from '../../hooks/toast'
 import { AuthVariants, FormVariants } from '../../styles/variants'
 
 const { authcontent, authwrapper, authtitle, authdescript, authlink } = AuthVariants()
@@ -14,10 +14,12 @@ type FormProps = {
 }
 
 export const SignInPage = () => {
+  const toast = UseToast()
+
   const [searchParams] = useSearchParams()
 
-  const { handleAddNotify } = UseNotify()
   const { mutateAsync: authenticate } = useMutation({ mutationFn: SignInApi })
+
   const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<FormProps>({
     defaultValues: { email: searchParams.get('email') ?? '' }
   })
@@ -25,15 +27,13 @@ export const SignInPage = () => {
   const handleSubmitForm = async (data: FormProps) => {
     try {
       await authenticate({ email: data.email })
-      handleAddNotify({
-        type: 'success',
+      toast.success({
         title: 'Verifique seu e-mail!',
         description: `Um link de autenticação foi enviado para o e-mail ${data.email}.`
       })
       reset()
     } catch {
-      handleAddNotify({
-        type: 'error',
+      toast.error({
         title: 'Credenciais inválidas!',
         description: `${data.email} não correspondem aos nossos registros. Cadastre-se.`
       })

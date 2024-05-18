@@ -16,7 +16,7 @@ import { AppPage } from './routes/app/root'
 import { OrderPage } from './routes/app/order'
 import { DashboardPage } from './routes/app/dashboard'
 
-import { NotifyContextProvider } from './context/notify'
+import { ToastContextProvider } from './contexts/toast'
 
 const queryClient = new QueryClient()
 
@@ -56,10 +56,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <NotifyContextProvider>
+    <ToastContextProvider>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
       </QueryClientProvider>
-    </NotifyContextProvider>
+    </ToastContextProvider>
   </React.StrictMode>
 )
