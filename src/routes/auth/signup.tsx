@@ -10,7 +10,8 @@ const { authcontent, authwrapper, authtitle, authdescript, authlink } = AuthVari
 const { formcontent, formgroup, forminput, formlabel, formerror, formaction } = FormVariants()
 
 type FormProps = {
-  name: string
+  restaurantName: string
+  managerName: string
   email: string
 }
 
@@ -25,7 +26,7 @@ export const SignUpPage = () => {
 
   const handleSubmitForm = async (data: FormProps) => {
     try {
-      await subscribe({ name: data.name, email: data.email })
+      await subscribe({ restaurantName: data.restaurantName, managerName: data.managerName, email: data.email })
       toast.success({
         title: `Cadastro realizado!`,
         description: `Acesse com o e-mail ${data.email} para receber um link de autenticação.`
@@ -47,10 +48,16 @@ export const SignUpPage = () => {
         <h1 className={authtitle()}>Cadastre-se</h1>
         <Form className={formcontent()} onSubmit={handleSubmit(handleSubmitForm)}>
           <div className={formgroup()}>
-            <input className={forminput()} type='text' id='name' placeholder=' '
-              {...register('name', { required: { value: true, message: 'Por favor, informe um nome' } })} />
-            <label className={formlabel()} htmlFor='name'>Nome</label>
-            {errors.name && <span className={formerror()}>{errors.name.message}</span>}
+            <input className={forminput()} type='text' id='restaurantName' placeholder=' '
+              {...register('restaurantName', { required: { value: true, message: 'Por favor, informe um nome' } })} />
+            <label className={formlabel()} htmlFor='restaurant'>Restaurante</label>
+            {errors.restaurantName && <span className={formerror()}>{errors.restaurantName.message}</span>}
+          </div>
+          <div className={formgroup()}>
+            <input className={forminput()} type='text' id='managerName' placeholder=' '
+              {...register('managerName', { required: { value: true, message: 'Por favor, informe um nome' } })} />
+            <label className={formlabel()} htmlFor='managerName'>Nome</label>
+            {errors.managerName && <span className={formerror()}>{errors.managerName.message}</span>}
           </div>
           <div className={formgroup()}>
             <input className={forminput()} type='email' id='email' placeholder=' '
@@ -58,7 +65,7 @@ export const SignUpPage = () => {
             <label className={formlabel()} htmlFor='email'>E-mail</label>
             {errors.email && <span className={formerror()}>{errors.email.message}</span>}
           </div>
-          <button className={formaction()} disabled={!watch('name') || !watch('email')} type="submit">Cadastrar</button>
+          <button className={formaction()} disabled={!watch('restaurantName') || !watch('managerName') || !watch('email')} type="submit">Cadastrar</button>
         </Form>
         <p className={authdescript()}>Já tem uma conta?{' '}<Link to={'/signin'} className={authlink()}>Entrar.</Link></p>
       </div>

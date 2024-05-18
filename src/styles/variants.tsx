@@ -32,18 +32,18 @@ export const HeaderVariants = tv({
   slots: {
     headercontent: 'flex py-8',
     headerwrapper: 'w-full flex items-center justify-between gap-8 font-medium',
-    headerlf: 'flex items-center divide-x-2 divide-in-stone gap-6',
+    headerlf: 'flex items-center divide-x-2 divide-in-stone gap-8',
     headerlogo: 'size-6 shrink-0',
-    headeritems: 'hidden sm:flex items-center gap-6 px-6',
-    headeritem: 'flex items-center gap-2 uppercase aria-[current=page]:underline underline-offset-4 aria-[current=page]:decoration-2 decoration-in-cyan focus:outline-none group',
-    headericon: 'size-4 shrink-0 group-aria-[current=page]:text-in-cyan',
+    headeritems: 'hidden sm:flex items-center gap-8 px-6',
+    headeritem: 'flex items-center gap-2 uppercase focus:outline-none group',
+    headericon: 'size-4 shrink-0 group-aria-[current=page]:text-in-cyan -mt-1',
   }
 })
 
 export const MenuVariants = tv({
   slots: {
     menucontent: 'relative z-10',
-    menuaction: 'flex items-center gap-2 hover:text-in-cyan focus:outline-none group transition ease-in-out duration-300',
+    menuaction: 'flex items-center gap-2 uppercase hover:text-in-cyan focus:outline-none group transition ease-in-out duration-300',
     menudownicon: 'size-4 shrink-0 group-aria-[expanded=true]:-rotate-180 transform transition ease-in-out duration-300',
     menuitems: 'absolute origin-top-right right-0 w-60 flex flex-col gap-2 p-2 mt-2 rounded-md shadow-lg bg-in-slate focus:outline-none',
     menuitem: 'flex sm:[&:nth-child(1)]:hidden sm:[&:nth-child(2)]:hidden items-center gap-2 p-2 rounded-md hover:bg-in-cyan hover:text-in-dark focus:outline-none group transition ease-in-out duration-300',
@@ -81,7 +81,7 @@ export const OrderVariants = tv({
     ordersteps: 'flex items-center justify-center gap-2',
     orderaction: 'relative px-2 group hover:text-in-cyan focus:outline-none transition ease-in-out duration-300',
     ordericon: 'size-4 shrink-0',
-    ordertooltip: 'absolute z-10 px-2 py-1 rounded-md shadow-lg text-xs md:text-sm font-medium left-2/4 -translate-x-2/4 -top-full -translate-y-2/4 group-hover:border-b-2 border-in-cyan bg-in-cyan/10 text-in-white invisible group-hover:visible',
+    ordertooltip: 'absolute z-10 px-2 py-1 rounded-md shadow-lg text-xs md:text-sm font-medium left-2/4 -translate-x-2/4 -top-full -translate-y-2/3 group-hover:border-b-2 border-in-cyan bg-in-cyan/10 text-in-white invisible group-hover:visible',
   },
   variants: {
     color: {

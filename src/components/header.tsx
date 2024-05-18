@@ -1,8 +1,10 @@
 import { Fragment } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { Link, NavLink } from 'react-router-dom'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon, LogOutIcon, PanelsTopLeftIcon, PizzaIcon, SettingsIcon, SquareGanttChartIcon } from 'lucide-react'
 
+import { RestaurantApi } from '../api/restaurant'
 import { HeaderVariants, MenuVariants, ScaleVariants } from '../styles/variants'
 
 const { menucontent, menuaction, menudownicon, menuitems, menuitem, menuicon } = MenuVariants()
@@ -10,13 +12,15 @@ const { scaleenter, scaleenterto, scalefrom, scaleleave, scaleleavefrom, scalele
 const { headercontent, headerwrapper, headerlf, headerlogo, headeritems, headeritem, headericon } = HeaderVariants()
 
 const menuData = [
-  { id: 1, icon: PanelsTopLeftIcon, ancor: '/app/dashboard', title: 'Dashboard' },
-  { id: 2, icon: SquareGanttChartIcon, ancor: '/app/order', title: 'Pedidos' },
+  { id: 1, icon: PanelsTopLeftIcon, ancor: '/dashboard', title: 'Dashboard' },
+  { id: 2, icon: SquareGanttChartIcon, ancor: '/order', title: 'Pedidos' },
   { id: 3, icon: SettingsIcon, ancor: '/', title: 'Configurações' },
-  { id: 4, icon: LogOutIcon, ancor: '/', title: 'Sair' }
+  { id: 4, icon: LogOutIcon, ancor: '/signin', title: 'Sair' }
 ]
 
 export const HeaderComponent = () => {
+  const { data: restaurant } = useQuery({ queryKey: ['restaurant'], queryFn: RestaurantApi })
+
   return (
     <div className={headercontent()}>
       <div className={headerwrapper()}>
@@ -33,7 +37,7 @@ export const HeaderComponent = () => {
         </div>
         <Menu className={menucontent()} as={'div'}>
           <Menu.Button className={menuaction()}>
-            <span>igornicoletti@outlook.com</span>
+            <span>{restaurant?.name}</span>
             <ChevronDownIcon className={menudownicon()} aria-hidden={true} />
           </Menu.Button>
           <Transition as={Fragment}

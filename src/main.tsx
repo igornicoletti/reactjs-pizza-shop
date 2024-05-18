@@ -23,32 +23,32 @@ const queryClient = new QueryClient()
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <AuthPage />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: 'signin?',
-        element: <SignInPage />
-      },
-      {
-        path: 'signup',
-        element: <SignUpPage />
-      }
-    ]
-  },
-  {
-    path: '/app',
     element: <AppPage />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/app/dashboard?',
+        path: '/dashboard?',
         element: <DashboardPage />
       },
       {
-        path: '/app/order',
+        path: '/order',
         element: <OrderPage />,
         loader: async () => await OrderLoader()
+      }
+    ]
+  },
+  {
+    path: '/',
+    element: <AuthPage />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '/signin',
+        element: <SignInPage />
+      },
+      {
+        path: '/signup',
+        element: <SignUpPage />
       }
     ]
   }
