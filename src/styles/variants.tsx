@@ -35,7 +35,7 @@ export const HeaderVariants = tv({
     headerlf: 'flex items-center divide-x-2 divide-in-stone gap-8',
     headerlogo: 'size-6 shrink-0',
     headeritems: 'hidden sm:flex items-center gap-8 px-6',
-    headeritem: 'flex items-center gap-2 uppercase focus:outline-none group',
+    headeritem: 'flex items-center gap-2 uppercase aria-[current=page]:text-in-cyan focus:outline-none group',
     headericon: 'size-4 shrink-0 group-aria-[current=page]:text-in-cyan -mt-1',
   }
 })
@@ -43,11 +43,11 @@ export const HeaderVariants = tv({
 export const MenuVariants = tv({
   slots: {
     menucontent: 'relative z-10',
-    menuaction: 'flex items-center gap-2 uppercase hover:text-in-cyan focus:outline-none group transition ease-in-out duration-300',
+    menuaction: 'flex items-center gap-4 uppercase hover:text-in-cyan focus:outline-none group transition ease-in-out duration-300',
     menudownicon: 'size-4 shrink-0 group-aria-[expanded=true]:-rotate-180 transform transition ease-in-out duration-300',
     menuitems: 'absolute origin-top-right right-0 w-60 flex flex-col gap-2 p-2 mt-2 rounded-md shadow-lg bg-in-slate focus:outline-none',
-    menuitem: 'flex sm:[&:nth-child(1)]:hidden sm:[&:nth-child(2)]:hidden items-center gap-2 p-2 rounded-md hover:bg-in-cyan hover:text-in-dark focus:outline-none group transition ease-in-out duration-300',
-    menuicon: 'size-4 shrink-0 text-in-cyan group-hover:text-in-dark',
+    menuitem: 'flex sm:[&:nth-child(1)]:hidden sm:[&:nth-child(2)]:hidden items-center gap-2 p-2 rounded-md hover:bg-in-cyan hover:text-in-dark aria-[current=page]:bg-in-cyan aria-[current=page]:text-in-dark focus:outline-none group transition ease-in-out duration-300',
+    menuicon: 'size-4 shrink-0 text-in-cyan group-hover:text-in-dark group-aria-[current=page]:text-in-dark -mt-1',
   }
 })
 
@@ -77,23 +77,38 @@ export const OrderVariants = tv({
     orderthead: 'lg:border-x-2 border-in-cyan',
     ordertbody: 'divide-y-2 divide-in-dark',
     orderrow: '*:whitespace-nowrap *:px-4 *:py-3 first:*:text-center last:*:text-center',
-    orderstatus: 'px-2 py-1 rounded-full text-xs md:text-sm font-medium bg-in-cyan/10 text-in-cyan',
+    orderstatus: 'px-2 py-1 rounded-full text-xs md:text-sm font-medium',
     ordersteps: 'flex items-center justify-center gap-2',
-    orderaction: 'relative px-2 group hover:text-in-cyan focus:outline-none transition ease-in-out duration-300',
+    orderaction: 'relative px-2 group focus:outline-none transition ease-in-out duration-300',
     ordericon: 'size-4 shrink-0',
-    ordertooltip: 'absolute z-10 px-2 py-1 rounded-md shadow-lg text-xs md:text-sm font-medium left-2/4 -translate-x-2/4 -top-full -translate-y-2/3 group-hover:border-b-2 border-in-cyan bg-in-cyan/10 text-in-white invisible group-hover:visible',
+    ordertooltip: 'absolute z-10 px-2 py-1 rounded-md shadow-lg text-xs md:text-sm font-medium left-2/4 -translate-x-2/4 -top-full -translate-y-2/3 group-hover:border-b-2 bg-in-cyan/10 border-in-cyan text-in-white invisible group-hover:visible',
   },
   variants: {
     color: {
-      concluded: {
-        orderstatus: 'bg-in-green/10 text-in-green',
-        orderaction: 'hover:text-in-green',
-        ordertooltip: 'border-in-green',
-      },
       canceled: {
         orderstatus: 'bg-in-red/10 text-in-red',
         orderaction: 'hover:text-in-red',
         ordertooltip: 'border-in-red',
+      },
+      delivered: {
+        orderstatus: 'bg-in-green/10 text-in-green',
+        orderaction: 'hover:text-in-green',
+        ordertooltip: 'border-in-green',
+      },
+      delivering: {
+        orderstatus: 'bg-in-purple/10 text-in-purple',
+        orderaction: 'hover:text-in-purple',
+        ordertooltip: 'border-in-purple',
+      },
+      pending: {
+        orderstatus: 'bg-in-cyan/10 text-in-cyan',
+        orderaction: 'hover:text-in-cyan',
+        ordertooltip: 'border-in-cyan',
+      },
+      processing: {
+        orderstatus: 'bg-in-orange/10 text-in-orange',
+        orderaction: 'hover:text-in-orange',
+        ordertooltip: 'border-in-orange',
       },
     }
   }
@@ -107,7 +122,7 @@ export const PaginationVariants = tv({
     pagingnumb: 'font-semibold',
     paginggroup: 'flex items-center gap-1',
     pagingaction: 'p-2 rounded-md border border-in-stone hover:bg-in-slate hover:border-in-cyan hover:text-in-cyan focus:outline-none group transition ease-in-out duration-300',
-    pagingicon: 'size-4',
+    pagingicon: 'size-4 shrink-0',
   }
 })
 

@@ -1,9 +1,10 @@
 import { Fragment } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { Link, NavLink } from 'react-router-dom'
 import { Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon, LogOutIcon, PanelsTopLeftIcon, PizzaIcon, SettingsIcon, SquareGanttChartIcon } from 'lucide-react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { ChevronDownIcon, LogOutIcon, PanelsTopLeftIcon, PizzaIcon, SquareGanttChartIcon } from 'lucide-react'
 
+import { SignOutApi } from '../api/signout'
 import { RestaurantApi } from '../api/restaurant'
 import { HeaderVariants, MenuVariants, ScaleVariants } from '../styles/variants'
 
@@ -13,13 +14,18 @@ const { headercontent, headerwrapper, headerlf, headerlogo, headeritems, headeri
 
 const menuData = [
   { id: 1, icon: PanelsTopLeftIcon, ancor: '/dashboard', title: 'Dashboard' },
-  { id: 2, icon: SquareGanttChartIcon, ancor: '/order', title: 'Pedidos' },
-  { id: 3, icon: SettingsIcon, ancor: '/', title: 'Configurações' },
-  { id: 4, icon: LogOutIcon, ancor: '/signin', title: 'Sair' }
+  { id: 2, icon: SquareGanttChartIcon, ancor: '/order', title: 'Pedidos' }
 ]
 
 export const HeaderComponent = () => {
+  const navigate = useNavigate()
+
   const { data: restaurant } = useQuery({ queryKey: ['restaurant'], queryFn: RestaurantApi })
+
+  const { mutateAsync: signout } = useMutation({
+    mutationFn: SignOutApi,
+    onSuccess: () => navigate('/signin', { replace: true })
+  })
 
   return (
     <div className={headercontent()}>
@@ -27,7 +33,7 @@ export const HeaderComponent = () => {
         <div className={headerlf()}>
           <PizzaIcon className={headerlogo()} aria-hidden={true} />
           <div className={headeritems()}>
-            {menuData.slice(0, 2).map((data) => (
+            {menuData.map((data) => (
               <NavLink className={headeritem()} key={data.id} to={data.ancor}>
                 <data.icon className={headericon()} aria-hidden={true} />
                 <span>{data.title}</span>
@@ -45,11 +51,19 @@ export const HeaderComponent = () => {
             leave={scaleleave()} leaveFrom={scaleleavefrom()} leaveTo={scaleleaveto()}>
             <Menu.Items className={menuitems()}>
               {menuData.map((data) => (
-                <Menu.Item className={menuitem()} as={Link} to={data.ancor} key={data.id}>
-                  <data.icon className={menuicon()} aria-hidden={true} />
-                  <span>{data.title}</span>
+                <Menu.Item key={data.id}>
+                  <NavLink className={menuitem()} to={data.ancor}>
+                    <data.icon className={menuicon()} aria-hidden={true} />
+                    <span>{data.title}</span>
+                  </NavLink>
                 </Menu.Item>
               ))}
+              <Menu.Item>
+                <button className={menuitem()} onClick={() => signout()}>
+                  <LogOutIcon className={menuicon()} aria-hidden={true} />
+                  <span>Sair</span>
+                </button>
+              </Menu.Item>
             </Menu.Items>
           </Transition>
         </Menu>

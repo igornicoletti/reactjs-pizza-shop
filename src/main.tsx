@@ -6,7 +6,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './index.css'
 
 import { ErrorPage } from './error'
-import { OrderLoader } from './data/order'
 
 import { AuthPage } from './routes/auth/root'
 import { SignInPage } from './routes/auth/signin'
@@ -16,6 +15,7 @@ import { AppPage } from './routes/app/root'
 import { OrderPage } from './routes/app/order'
 import { DashboardPage } from './routes/app/dashboard'
 
+import { ToastsComponent } from './components/toast'
 import { ToastContextProvider } from './contexts/toast'
 
 const queryClient = new QueryClient()
@@ -32,8 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/order',
-        element: <OrderPage />,
-        loader: async () => await OrderLoader()
+        element: <OrderPage />
       }
     ]
   },
@@ -60,6 +59,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
       </QueryClientProvider>
+      <ToastsComponent />
     </ToastContextProvider>
   </React.StrictMode>
 )

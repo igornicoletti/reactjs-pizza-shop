@@ -9,7 +9,5 @@ type Props = {
   role: "manager" | "customer"
 }
 
-export const ProfileApi = async () => {
-  const response = await api.get<Props>('/me')
-  return response.data
-}
+export const ProfileApi = async () =>
+  await api.get<Props>('/me').then((res) => res.data)

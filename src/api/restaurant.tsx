@@ -9,7 +9,5 @@ type Props = {
   managerId: string | null
 }
 
-export const RestaurantApi = async () => {
-  const response = await api.get<Props>('/managed-restaurant')
-  return response.data
-}
+export const RestaurantApi = async () =>
+  await api.get<Props>('/managed-restaurant').then((res) => res.data)
