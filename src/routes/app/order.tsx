@@ -1,5 +1,5 @@
 import { ptBR } from 'date-fns/locale'
-import { Form } from 'react-router-dom'
+import { Form, useSearchParams } from 'react-router-dom'
 import { Fragment, useState } from 'react'
 import { formatDistanceToNow } from 'date-fns'
 import { useQuery } from '@tanstack/react-query'
@@ -9,6 +9,7 @@ import { CheckIcon, ChevronsUpDownIcon, FileSearchIcon, FilterIcon, FilterXIcon,
 import { OrderApi } from '../../api/order'
 import { PaginationComponent } from '../../components/pagination'
 import { BtnVariants, FormVariants, OpacityVariants, OrderVariants } from '../../styles/variants'
+import { z } from 'zod'
 
 const { btnaction } = BtnVariants()
 const { formcontent, formgroup, forminput, formlabel, formicon } = FormVariants()
@@ -16,7 +17,7 @@ const { opacityenter, opacityenterto, opacityfrom, opacityleave, opacityleavefro
 const { ordercontent, orderwrapper, ordertitle, orderguide, orderfilter, ordertooltip, orderoverflow, ordertable, orderthead, ordertbody, orderrow, ordericon, orderstatus, ordersteps, orderaction } = OrderVariants()
 
 const people = [
-  { name: 'Todas categorias' },
+  { name: 'Categoria' },
   { name: 'Pendente' },
   { name: 'Preparação' },
   { name: 'Entrega' },
@@ -26,15 +27,34 @@ const people = [
 
 const orderStatus = {
   pending: 'Pendente',
-  processing: 'Processando',
+  processing: 'Preparação',
   delivering: 'Entrega',
   delivered: 'Concluído',
   canceled: 'Cancelado',
 }
 
 export const OrderPage = () => {
-  const { data: order } = useQuery({ queryKey: ['order'], queryFn: OrderApi })
   const [selected, setSelected] = useState(people[0])
+
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const pageIndex = z.coerce
+    .number()
+    .transform((page) => page - 1)
+    .parse(searchParams.get('page') ?? '1')
+
+  const { data: order } = useQuery({
+    queryKey: ['order', pageIndex],
+    queryFn: () => OrderApi({ pageIndex })
+  })
+
+  const handlePagination = (pageIndex: number) => {
+    setSearchParams((state) => {
+      state.set('page', (pageIndex + 1).toString())
+      return state
+    })
+  }
+
   return (
     <div className={ordercontent()}>
       <div className={orderwrapper()}>
@@ -44,7 +64,7 @@ export const OrderPage = () => {
             <Form className={formcontent({ display: 'row' })}>
               <div className={formgroup()}>
                 <input className={forminput()} type='text' id='id' placeholder=' ' />
-                <label className={formlabel()} htmlFor='id'>Id do pedido</label>
+                <label className={formlabel()} htmlFor='id'>Identificador</label>
               </div>
               <div className={formgroup()}>
                 <input className={forminput()} type='text' id='client' placeholder=' ' />
@@ -52,6 +72,7 @@ export const OrderPage = () => {
               </div>
               <div className={formgroup()}>
                 <Listbox value={selected} onChange={setSelected}>
+                  <Listbox.Label className={formlabel()}>{selected.name !== 'Categoria' ? 'Categoria' : ''}</Listbox.Label>
                   <Listbox.Button className={'flex items-center justify-between w-full h-12 px-4 rounded-md border border-in-stone hover:border-in-white focus:border-in-cyan bg-transparent focus:outline-none transition ease-in-out duration-300'}>
                     <span>{selected.name}</span>
                     <ChevronsUpDownIcon className="size-4 shrink-0" aria-hidden="true" />
@@ -72,7 +93,7 @@ export const OrderPage = () => {
               </div>
               <button className={btnaction({ color: 'inherit' })} type="submit">
                 <FilterIcon className={formicon()} />
-                <span>Filtrar resultados</span>
+                <span>Filtrar pedidos</span>
               </button>
               <button className={btnaction({ color: 'inherit' })} type="submit">
                 <FilterXIcon className={formicon()} />
@@ -85,12 +106,12 @@ export const OrderPage = () => {
               <thead className={orderthead()}>
                 <tr className={orderrow()}>
                   <th scope='col'>Dados</th>
-                  <th scope='col'>Id do pedido</th>
-                  <th scope='col'>Nome do cliente</th>
+                  <th scope='col'>Identificador</th>
                   <th scope='col'>Entrada</th>
                   <th scope='col'>Categoria</th>
+                  <th scope='col'>Nome do cliente</th>
                   <th scope='col'>Valor total</th>
-                  <th scope='col'>Etapas</th>
+                  <th scope='col'>Status</th>
                 </tr>
               </thead>
               <tbody className={ordertbody()}>
@@ -103,9 +124,9 @@ export const OrderPage = () => {
                       </button>
                     </td>
                     <td>{data.orderId}</td>
-                    <td>{data.customerName}</td>
                     <td>{formatDistanceToNow(data.createdAt, { locale: ptBR, addSuffix: true })}</td>
-                    <td><span className={orderstatus({ color: data.status })}>{orderStatus[data.status]}</span></td>
+                    <td><li className={orderstatus({ color: data.status })}>{orderStatus[data.status]}</li></td>
+                    <td>{data.customerName}</td>
                     <td>{data.total.toLocaleString('pt-br', { currency: 'BRL', style: 'currency' })}</td>
                     <td>
                       <div className={ordersteps()}>
@@ -124,7 +145,7 @@ export const OrderPage = () => {
               </tbody>
             </table>
           </div>
-          {order && <PaginationComponent pageIndex={order.meta.pageIndex} totalCount={order.meta.totalCount} peerPage={order.meta.perPage} />}
+          {order && <PaginationComponent handlePagination={handlePagination} pageIndex={order.meta.pageIndex} totalCount={order.meta.totalCount} peerPage={order.meta.perPage} />}
         </div>
       </div>
     </div>

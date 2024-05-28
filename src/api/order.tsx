@@ -15,5 +15,9 @@ type Props = {
   }
 }
 
-export const OrderApi = async () =>
-  await api.get<Props>('/orders', { params: { pageIndex: 0 } }).then((res) => res.data)
+type OrderProps = {
+  pageIndex: number | null
+}
+
+export const OrderApi = async ({ pageIndex }: OrderProps) =>
+  await api.get<Props>('/orders', { params: { pageIndex } }).then((res) => res.data)

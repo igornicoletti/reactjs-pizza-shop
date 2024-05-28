@@ -99,8 +99,8 @@ export const OrderVariants = tv({
     ordertable: 'min-w-full text-left divide-y-2 divide-in-dark bg-in-slate',
     orderthead: 'lg:border-x-2 border-in-cyan',
     ordertbody: 'divide-y-2 divide-in-dark',
-    orderrow: '*:whitespace-nowrap *:px-4 *:py-3 first:*:text-center last:*:text-center [&:nth-child(5)]:*:text-center [&:nth-child(6)]:*:text-right',
-    orderstatus: 'px-2 py-1 rounded-full text-xs md:text-sm font-medium',
+    orderrow: '*:whitespace-nowrap *:px-4 *:py-3 first:*:text-center last:*:text-center [&:nth-child(6)]:*:text-right',
+    orderstatus: 'list-disc font-medium',
     ordersteps: 'flex items-center justify-center gap-2',
     orderaction: 'group relative px-2 focus:outline-none transition ease-in-out duration-300',
     ordericon: 'size-4 shrink-0',
@@ -108,30 +108,30 @@ export const OrderVariants = tv({
   },
   variants: {
     color: {
-      canceled: {
-        orderstatus: 'bg-in-red/10 text-in-red',
-        orderaction: 'hover:text-in-red',
-        ordertooltip: 'border-in-red',
-      },
-      delivered: {
-        orderstatus: 'bg-in-green/10 text-in-green',
-        orderaction: 'hover:text-in-green',
-        ordertooltip: 'border-in-green',
-      },
-      delivering: {
-        orderstatus: 'bg-in-purple/10 text-in-purple',
-        orderaction: 'hover:text-in-purple',
-        ordertooltip: 'border-in-purple',
-      },
       pending: {
-        orderstatus: 'bg-in-cyan/10 text-in-cyan',
+        orderstatus: 'marker:text-in-cyan',
         orderaction: 'hover:text-in-cyan',
         ordertooltip: 'border-in-cyan',
       },
       processing: {
-        orderstatus: 'bg-in-orange/10 text-in-orange',
+        orderstatus: 'marker:text-in-purple',
+        orderaction: 'hover:text-in-purple',
+        ordertooltip: 'border-in-purple',
+      },
+      delivering: {
+        orderstatus: 'marker:text-in-orange',
         orderaction: 'hover:text-in-orange',
         ordertooltip: 'border-in-orange',
+      },
+      delivered: {
+        orderstatus: 'marker:text-in-green',
+        orderaction: 'hover:text-in-green',
+        ordertooltip: 'border-in-green',
+      },
+      canceled: {
+        orderstatus: 'marker:text-in-red',
+        orderaction: 'hover:text-in-red',
+        ordertooltip: 'border-in-red',
       },
     }
   }
@@ -144,7 +144,7 @@ export const PaginationVariants = tv({
     paginginfo: 'text-sm',
     pagingnumb: 'font-semibold',
     paginggroup: 'flex items-center gap-1',
-    pagingaction: 'group p-2 rounded-md border border-in-stone hover:bg-in-slate hover:border-in-cyan focus:outline-none transition ease-in-out duration-300',
+    pagingaction: 'group p-2 rounded-md border border-in-stone hover:border-in-cyan focus:outline-none disabled:hover:border-in-stone disabled:cursor-not-allowed transition ease-in-out duration-300',
     pagingicon: 'size-4 shrink-0',
   }
 })
