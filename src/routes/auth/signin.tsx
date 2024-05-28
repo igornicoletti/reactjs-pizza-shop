@@ -4,10 +4,11 @@ import { Form, Link, useSearchParams } from 'react-router-dom'
 
 import { SignInApi } from '../../api/signin'
 import { UseToast } from '../../hooks/toast'
-import { AuthVariants, FormVariants } from '../../styles/variants'
+import { AuthVariants, BtnVariants, FormVariants } from '../../styles/variants'
 
+const { btnaction } = BtnVariants()
+const { formcontent, formgroup, forminput, formlabel, formerror } = FormVariants()
 const { authcontent, authwrapper, authtitle, authdescript, authlink } = AuthVariants()
-const { formcontent, formgroup, forminput, formlabel, formerror, formaction } = FormVariants()
 
 type FormProps = {
   email: string
@@ -52,7 +53,7 @@ export const SignInPage = () => {
             <label className={formlabel()} htmlFor='email'>E-mail</label>
             {errors.email && <span className={formerror()}>{errors.email.message}</span>}
           </div>
-          <button className={formaction()} disabled={!watch('email')} type="submit">Acessar</button>
+          <button className={btnaction({ color: 'cyan' })} disabled={!watch('email')} type="submit">Acessar</button>
         </Form>
         <p className={authdescript()}>Não tem uma conta?{' '}<Link to={'/signup'} className={authlink()}>Cadastre-se.</Link></p>
       </div>

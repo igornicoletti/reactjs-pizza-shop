@@ -4,10 +4,11 @@ import { Form, Link, useNavigate } from 'react-router-dom'
 
 import { UseToast } from '../../hooks/toast'
 import { SignUpApi } from '../../api/signup'
-import { AuthVariants, FormVariants } from '../../styles/variants'
+import { AuthVariants, BtnVariants, FormVariants } from '../../styles/variants'
 
+const { btnaction } = BtnVariants()
+const { formcontent, formgroup, forminput, formlabel, formerror } = FormVariants()
 const { authcontent, authwrapper, authtitle, authdescript, authlink } = AuthVariants()
-const { formcontent, formgroup, forminput, formlabel, formerror, formaction } = FormVariants()
 
 type FormProps = {
   restaurantName: string
@@ -65,7 +66,7 @@ export const SignUpPage = () => {
             <label className={formlabel()} htmlFor='email'>E-mail</label>
             {errors.email && <span className={formerror()}>{errors.email.message}</span>}
           </div>
-          <button className={formaction()} disabled={!watch('restaurantName') || !watch('managerName') || !watch('email')} type="submit">Cadastrar</button>
+          <button className={btnaction({ color: 'cyan' })} disabled={!watch('restaurantName') || !watch('managerName') || !watch('email')} type="submit">Cadastrar</button>
         </Form>
         <p className={authdescript()}>Já tem uma conta?{' '}<Link to={'/signin'} className={authlink()}>Entrar.</Link></p>
       </div>
