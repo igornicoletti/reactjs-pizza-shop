@@ -44,11 +44,11 @@ export const OrderPage = () => {
             <Form className={formcontent({ display: 'row' })}>
               <div className={formgroup()}>
                 <input className={forminput()} type='text' id='id' placeholder=' ' />
-                <label className={formlabel()} htmlFor='id'>Identificador</label>
+                <label className={formlabel()} htmlFor='id'>Id do pedido</label>
               </div>
               <div className={formgroup()}>
                 <input className={forminput()} type='text' id='client' placeholder=' ' />
-                <label className={formlabel()} htmlFor='client'>Nome cliente</label>
+                <label className={formlabel()} htmlFor='client'>Nome do cliente</label>
               </div>
               <div className={formgroup()}>
                 <Listbox value={selected} onChange={setSelected}>
@@ -76,7 +76,7 @@ export const OrderPage = () => {
               </button>
               <button className={btnaction({ color: 'inherit' })} type="submit">
                 <FilterXIcon className={formicon()} />
-                <span>Remover filtros</span>
+                <span>Limpar filtros</span>
               </button>
             </Form>
           </div>
@@ -85,11 +85,11 @@ export const OrderPage = () => {
               <thead className={orderthead()}>
                 <tr className={orderrow()}>
                   <th scope='col'>Dados</th>
-                  <th scope='col'>Identificador</th>
+                  <th scope='col'>Id do pedido</th>
                   <th scope='col'>Nome do cliente</th>
                   <th scope='col'>Entrada</th>
                   <th scope='col'>Categoria</th>
-                  <th scope='col'>Total</th>
+                  <th scope='col'>Valor total</th>
                   <th scope='col'>Etapas</th>
                 </tr>
               </thead>
