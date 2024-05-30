@@ -1,29 +1,16 @@
+import { z } from 'zod'
 import { ptBR } from 'date-fns/locale'
-import { Form, useSearchParams } from 'react-router-dom'
-import { Fragment, useState } from 'react'
 import { formatDistanceToNow } from 'date-fns'
 import { useQuery } from '@tanstack/react-query'
-import { Listbox, Transition } from '@headlessui/react'
-import { CheckIcon, ChevronsUpDownIcon, FileSearchIcon, FilterIcon, FilterXIcon, ThumbsDownIcon, ThumbsUpIcon } from 'lucide-react'
+import { useSearchParams } from 'react-router-dom'
+import { FileSearchIcon, PizzaIcon, FrownIcon } from 'lucide-react'
 
 import { OrderApi } from '../../api/order'
+import { OrderVariants } from '../../styles/variants'
+import { FilterComponent } from '../../components/filter'
 import { PaginationComponent } from '../../components/pagination'
-import { BtnVariants, FormVariants, OpacityVariants, OrderVariants } from '../../styles/variants'
-import { z } from 'zod'
 
-const { btnaction } = BtnVariants()
-const { formcontent, formgroup, forminput, formlabel, formicon } = FormVariants()
-const { opacityenter, opacityenterto, opacityfrom, opacityleave, opacityleavefrom, opacityleaveto } = OpacityVariants()
-const { ordercontent, orderwrapper, ordertitle, orderguide, orderfilter, ordertooltip, orderoverflow, ordertable, orderthead, ordertbody, orderrow, ordericon, orderstatus, ordersteps, orderaction } = OrderVariants()
-
-const people = [
-  { name: 'Categoria' },
-  { name: 'Pendente' },
-  { name: 'Preparação' },
-  { name: 'Entrega' },
-  { name: 'Concluído' },
-  { name: 'Cancelado' },
-]
+const { ordercontent, orderwrapper, ordertitle, orderguide, ordertooltip, orderoverflow, ordertable, orderthead, ordertbody, ordertfoot, orderrow, ordericon, orderstatus, ordersteps, orderaction } = OrderVariants()
 
 const orderStatus = {
   pending: 'Pendente',
@@ -34,8 +21,6 @@ const orderStatus = {
 }
 
 export const OrderPage = () => {
-  const [selected, setSelected] = useState(people[0])
-
   const [searchParams, setSearchParams] = useSearchParams()
 
   const pageIndex = z.coerce
@@ -59,94 +44,69 @@ export const OrderPage = () => {
     <div className={ordercontent()}>
       <div className={orderwrapper()}>
         <h1 className={ordertitle()}>Pedidos</h1>
-        <div className={orderguide()}>
-          <div className={orderfilter()}>
-            <Form className={formcontent({ display: 'row' })}>
-              <div className={formgroup()}>
-                <input className={forminput()} type='text' id='id' placeholder=' ' />
-                <label className={formlabel()} htmlFor='id'>Identificador</label>
-              </div>
-              <div className={formgroup()}>
-                <input className={forminput()} type='text' id='client' placeholder=' ' />
-                <label className={formlabel()} htmlFor='client'>Nome do cliente</label>
-              </div>
-              <div className={formgroup()}>
-                <Listbox value={selected} onChange={setSelected}>
-                  <Listbox.Label className={formlabel()}>{selected.name !== 'Categoria' ? 'Categoria' : ''}</Listbox.Label>
-                  <Listbox.Button className={'flex items-center justify-between w-full h-12 px-4 rounded-md border border-in-stone hover:border-in-white focus:border-in-cyan bg-transparent focus:outline-none transition ease-in-out duration-300'}>
-                    <span>{selected.name}</span>
-                    <ChevronsUpDownIcon className="size-4 shrink-0" aria-hidden="true" />
-                  </Listbox.Button>
-                  <Transition as={Fragment}
-                    enter={opacityenter()} enterFrom={opacityfrom()} enterTo={opacityenterto()}
-                    leave={opacityleave()} leaveFrom={opacityleavefrom()} leaveTo={opacityleaveto()}>
-                    <Listbox.Options className="absolute right-0 w-full flex flex-col p-2 mt-2 rounded-md shadow-lg bg-in-slate focus:outline-none">
-                      {people.map((person, personIdx) => (
-                        <Listbox.Option key={personIdx} className="group flex items-center gap-2 p-2 rounded-md hover:bg-in-cyan hover:text-in-dark focus:outline-none transition ease-in-out duration-300" value={person}>
-                          <CheckIcon className="size-4 shrink-0 invisible ui-selected:visible text-in-cyan group-hover:text-in-dark" />
-                          <span>{person.name}</span>
-                        </Listbox.Option>
-                      ))}
-                    </Listbox.Options>
-                  </Transition>
-                </Listbox>
-              </div>
-              <button className={btnaction({ color: 'inherit' })} type="submit">
-                <FilterIcon className={formicon()} />
-                <span>Filtrar pedidos</span>
-              </button>
-              <button className={btnaction({ color: 'inherit' })} type="submit">
-                <FilterXIcon className={formicon()} />
-                <span>Limpar filtros</span>
-              </button>
-            </Form>
-          </div>
-          <div className={orderoverflow()}>
-            <table className={ordertable()}>
-              <thead className={orderthead()}>
-                <tr className={orderrow()}>
-                  <th scope='col'>Dados</th>
-                  <th scope='col'>Identificador</th>
-                  <th scope='col'>Entrada</th>
-                  <th scope='col'>Categoria</th>
-                  <th scope='col'>Nome do cliente</th>
-                  <th scope='col'>Valor total</th>
-                  <th scope='col'>Status</th>
-                </tr>
-              </thead>
-              <tbody className={ordertbody()}>
-                {order && order.orders.map((data) => (
-                  <tr className={orderrow()} key={data.orderId}>
-                    <td>
-                      <button className={orderaction()}>
-                        <FileSearchIcon className={ordericon()} aria-hidden={true} />
-                        <p className={ordertooltip()}>Detalhes</p>
-                      </button>
-                    </td>
-                    <td>{data.orderId}</td>
-                    <td>{formatDistanceToNow(data.createdAt, { locale: ptBR, addSuffix: true })}</td>
-                    <td><li className={orderstatus({ color: data.status })}>{orderStatus[data.status]}</li></td>
-                    <td>{data.customerName}</td>
-                    <td>{data.total.toLocaleString('pt-br', { currency: 'BRL', style: 'currency' })}</td>
-                    <td>
-                      <div className={ordersteps()}>
-                        <button className={orderaction({ color: 'delivered' })}>
-                          <ThumbsUpIcon className={ordericon()} aria-hidden={true} />
-                          <p className={ordertooltip({ color: 'delivered' })}>Aprovar</p>
-                        </button>
-                        <button className={orderaction({ color: 'canceled' })}>
-                          <ThumbsDownIcon className={ordericon()} aria-hidden={true} />
-                          <p className={ordertooltip({ color: 'canceled' })}>Cancelar</p>
-                        </button>
-                      </div>
-                    </td>
+        {order &&
+          <div className={orderguide()}>
+            <FilterComponent />
+            <div className={orderoverflow()}>
+              <table className={ordertable()}>
+                <thead className={orderthead()}>
+                  <tr className={orderrow()}>
+                    <th scope='col'>Dados</th>
+                    <th scope='col'>Identificador</th>
+                    <th scope='col'>Nome do cliente</th>
+                    <th scope='col'>Entrada</th>
+                    <th scope='col'>Status</th>
+                    <th scope='col'>Valor total</th>
+                    <th scope='col'>Ações</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                {order.orders.length > 0 ? (
+                  <tbody className={ordertbody()}>
+                    {order.orders.map((data) => (
+                      <tr className={orderrow()} key={data.orderId}>
+                        <td>
+                          <button className={orderaction()}>
+                            <FileSearchIcon className={ordericon()} aria-hidden={true} />
+                            <span className={ordertooltip()}>Detalhes</span>
+                          </button>
+                        </td>
+                        <td>{data.orderId}</td>
+                        <td>{data.customerName}</td>
+                        <td>{formatDistanceToNow(data.createdAt, { locale: ptBR, addSuffix: true })}</td>
+                        <td>
+                          <li className={orderstatus({ color: data.status })}>{orderStatus[data.status]}</li>
+                        </td>
+                        <td>{data.total.toLocaleString('pt-br', { currency: 'BRL', style: 'currency' })}</td>
+                        <td>
+                          <div className={ordersteps()}>
+                            <button className={orderaction({ color: 'processing' })}>
+                              <PizzaIcon className={ordericon()} aria-hidden={true} />
+                              <span className={ordertooltip({ color: 'processing' })}>Preparação</span>
+                            </button>
+                            <button className={orderaction({ color: 'canceled' })}>
+                              <FrownIcon className={ordericon()} aria-hidden={true} />
+                              <span className={ordertooltip({ color: 'canceled' })}>Cancelar</span>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                ) : (
+                  <tfoot>
+                    <tr>
+                      <th className={ordertfoot()} colSpan={7}>
+                        <PizzaIcon size={32} aria-hidden={true} />
+                        <p>Não existe pedidos realizados</p>
+                      </th>
+                    </tr>
+                  </tfoot>
+                )}
+              </table>
+            </div>
+            <PaginationComponent handlePagination={handlePagination} pageIndex={order.meta.pageIndex} totalCount={order.meta.totalCount} peerPage={order.meta.perPage} />
           </div>
-          {order && <PaginationComponent handlePagination={handlePagination} pageIndex={order.meta.pageIndex} totalCount={order.meta.totalCount} peerPage={order.meta.perPage} />}
-        </div>
+        }
       </div>
     </div>
   )

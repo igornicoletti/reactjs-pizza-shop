@@ -11,7 +11,7 @@ export default {
       colors: {
         'in-amber': '#fbbf24',
         'in-blue': '#60a5fa',
-        'in-cyan': '#8Be9fd',
+        'in-cyan': '#8be9fd',
         'in-dark': '#282a36',
         'in-emerald': '#34d399',
         'in-fuchsia': '#e879f9',

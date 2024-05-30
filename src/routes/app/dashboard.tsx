@@ -1,7 +1,7 @@
 import { DashboardVariants } from '../../styles/variants'
 import { CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
-const { dashcontent, dashwrapper, dashtitle, dashguide, dashhcards, dashhcard, dashhinfo, dashvalue, dashdescript } = DashboardVariants()
+const { dashcontent, dashwrapper, dashtitle, dashguide, dashdata, dashchart, dashcardlt, dashcardrt, dashcard, dashinfo, dashvalue, dashdescript } = DashboardVariants()
 
 const cardData = [
   {
@@ -12,7 +12,7 @@ const cardData = [
   },
   {
     id: 2,
-    title: "Vendas",
+    title: "Concluídos",
     value: '124',
     descript: "+18.1% em relação ao mês passado"
   },
@@ -24,7 +24,7 @@ const cardData = [
   },
   {
     id: 4,
-    title: "Rendimento total",
+    title: "Faturamento",
     value: 'R$ 1448.60',
     descript: "+38% em relação ao mês passado"
   }
@@ -52,26 +52,26 @@ const pieData = [
   {
     id: 2,
     product: 'Mussarrela',
-    amount: 24
+    amount: 31
   },
   {
     id: 3,
     product: 'Especial da casa',
-    amount: 12
+    amount: 24
   },
   {
     id: 4,
     product: 'Quatro queijos',
-    amount: 31
+    amount: 16
   },
   {
     id: 5,
     product: 'Marguerita',
-    amount: 16
+    amount: 10
   }
 ]
 
-const pieColors = ['#8Be9fd', '#f472b6', '#c084fc', '#fde047', '#4ade80']
+const pieColors = ['#8be9fd', '#c084fc', '#f472b6', '#4ade80', '#fde047']
 
 type Props = {
   cx: string
@@ -104,18 +104,18 @@ export const DashboardPage = () => {
       <div className={dashwrapper()}>
         <h1 className={dashtitle()}>Dashboard</h1>
         <div className={dashguide()}>
-          <ul className={dashhcards()}>
+          <div className={dashdata()}>
             {cardData.map((data) => (
-              <li className={dashhcard()} key={data.id}>
-                <p className={dashhinfo()}>{data.title}</p>
+              <div className={dashcard()} key={data.id}>
+                <p className={dashinfo()}>{data.title}</p>
                 <p className={dashvalue()}>{data.value}</p>
                 <p className={dashdescript()}>{data.descript}</p>
-              </li>
+              </div>
             ))}
-          </ul>
-          <div className='grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-6 gap-6'>
-            <div className='2xl:col-span-4 p-4 md:p-6 rounded-md shadow-lg border-b-2 border-in-cyan bg-gradient-to-br from-in-slate'>
-              <p className='uppercase font-medium pb-8'>Visão geral</p>
+          </div>
+          <div className={dashchart()}>
+            <div className={dashcardlt()}>
+              <p className={dashinfo()}>Visão geral</p>
               <ResponsiveContainer width={'100%'} height={350}>
                 <LineChart data={lineData} margin={{ top: 25, right: 50, left: 50, bottom: 25 }}>
                   <CartesianGrid vertical={false} stroke={'#44475a'} />
@@ -127,11 +127,11 @@ export const DashboardPage = () => {
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            <div className='2xl:col-span-2 p-4 md:p-6 rounded-md shadow-lg border-b-2 border-in-cyan bg-gradient-to-br from-in-slate'>
-              <p className='uppercase font-medium pb-8'>Vendas recentes</p>
+            <div className={dashcardrt()}>
+              <p className={dashinfo()}>Mais vendidos</p>
               <ResponsiveContainer width={'100%'} height={350}>
                 <PieChart>
-                  <Pie cx={'50%'} cy={'50%'} stroke={'#2b2d39'} dataKey={'amount'} nameKey={'product'} strokeWidth={10} labelLine={false} outerRadius={150} innerRadius={100} data={pieData} label={labelPieChart} >
+                  <Pie cx={'50%'} cy={'50%'} stroke={'#2b2d39'} dataKey={'amount'} nameKey={'product'} strokeWidth={10} labelLine={false} outerRadius={150} innerRadius={125} data={pieData} label={labelPieChart} >
                     {pieData.map((data) => (
                       <Cell key={data.id} fill={pieColors[data.id % pieColors.length]} />
                     ))}

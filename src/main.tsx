@@ -23,31 +23,31 @@ const queryClient = new QueryClient()
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <AppPage />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/dashboard?',
-        element: <DashboardPage />
-      },
-      {
-        path: '/order',
-        element: <OrderPage />
-      }
-    ]
-  },
-  {
-    path: '/',
     element: <AuthPage />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/signin',
+        path: '/signin?',
         element: <SignInPage />
       },
       {
         path: '/signup',
         element: <SignUpPage />
+      }
+    ]
+  },
+  {
+    path: '/',
+    element: <AppPage />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '/dashboard',
+        element: <DashboardPage />
+      },
+      {
+        path: '/order',
+        element: <OrderPage />
       }
     ]
   }

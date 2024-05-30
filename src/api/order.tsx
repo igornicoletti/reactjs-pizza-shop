@@ -16,7 +16,7 @@ type Props = {
 }
 
 type OrderProps = {
-  pageIndex: number | null
+  pageIndex: number
 }
 
 export const OrderApi = async ({ pageIndex }: OrderProps) =>
