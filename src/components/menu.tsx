@@ -10,11 +10,6 @@ import { ProfileApi, RestaurantApi, SignOutApi } from '../api'
 const { menucontent, menuaction, menudownicon, menuitems, menuitem, menuicon } = MenuVariants()
 const { scaleenter, scaleenterto, scalefrom, scaleleave, scaleleavefrom, scaleleaveto } = ScaleVariants()
 
-const menuData = [
-  { id: 1, icon: PanelsTopLeftIcon, ancor: '/dashboard', title: 'Dashboard' },
-  { id: 2, icon: SquareGanttChartIcon, ancor: '/order', title: 'Pedidos' }
-]
-
 export const MenuComponent = () => {
   const navigate = useNavigate()
 
@@ -41,14 +36,18 @@ export const MenuComponent = () => {
       )}
       <Transition as={Fragment} enter={scaleenter()} enterFrom={scalefrom()} enterTo={scaleenterto()} leave={scaleleave()} leaveFrom={scaleleavefrom()} leaveTo={scaleleaveto()}>
         <Menu.Items className={menuitems()}>
-          {menuData.map((data) => (
-            <Menu.Item key={data.id}>
-              <NavLink className={menuitem()} to={data.ancor}>
-                <data.icon className={menuicon()} aria-hidden={true} />
-                <span>{data.title}</span>
-              </NavLink>
-            </Menu.Item>
-          ))}
+          <Menu.Item>
+            <NavLink className={menuitem()} to={'/dashboard'}>
+              <PanelsTopLeftIcon className={menuicon()} aria-hidden={true} />
+              <span>Dashboard</span>
+            </NavLink>
+          </Menu.Item>
+          <Menu.Item>
+            <NavLink className={menuitem()} to={'/order'}>
+              <SquareGanttChartIcon className={menuicon()} aria-hidden={true} />
+              <span>Pedidos</span>
+            </NavLink>
+          </Menu.Item>
           <Menu.Item>
             <button className={menuitem()} onClick={() => signout()}>
               <LogOutIcon className={menuicon()} aria-hidden={true} />

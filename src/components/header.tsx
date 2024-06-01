@@ -6,11 +6,6 @@ import { HeaderVariants } from '../styles'
 
 const { headercontent, headerwrapper, headerlf, headerlogo, headeritems, headeritem, headericon } = HeaderVariants()
 
-const menuData = [
-  { id: 1, icon: PanelsTopLeftIcon, ancor: '/dashboard', title: 'Dashboard' },
-  { id: 2, icon: SquareGanttChartIcon, ancor: '/order', title: 'Pedidos' }
-]
-
 export const HeaderComponent = () => {
   return (
     <div className={headercontent()}>
@@ -18,12 +13,14 @@ export const HeaderComponent = () => {
         <div className={headerlf()}>
           <PizzaIcon className={headerlogo()} aria-hidden={true} />
           <div className={headeritems()}>
-            {menuData.map((data) => (
-              <NavLink className={headeritem()} key={data.id} to={data.ancor}>
-                <data.icon className={headericon()} aria-hidden={true} />
-                <span>{data.title}</span>
-              </NavLink>
-            ))}
+            <NavLink className={headeritem()} to={'/dashboard'}>
+              <PanelsTopLeftIcon className={headericon()} aria-hidden={true} />
+              <span>Dashboard</span>
+            </NavLink>
+            <NavLink className={headeritem()} to={'/order'}>
+              <SquareGanttChartIcon className={headericon()} aria-hidden={true} />
+              <span>Pedidos</span>
+            </NavLink>
           </div>
         </div>
         <MenuComponent />
