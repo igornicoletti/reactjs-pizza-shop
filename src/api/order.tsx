@@ -1,5 +1,5 @@
 import { api } from '../lib/axios'
-import { OrderMetaProps, OrderProps } from '../types'
+import { OrderParamsProps, OrderProps } from '../types'
 
-export const OrderApi = async ({ pageIndex }: OrderMetaProps) =>
-  await api.get<OrderProps>('/orders', { params: { pageIndex } }).then((res) => res.data)
+export const OrderApi = async ({ pageIndex, orderId, customerName, status }: OrderParamsProps) =>
+  await api.get<OrderProps>('/orders', { params: { pageIndex, orderId, customerName, status } }).then((res) => res.data)

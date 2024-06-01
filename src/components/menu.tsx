@@ -30,7 +30,7 @@ export const MenuComponent = () => {
     <Menu className={menucontent()} as={'div'}>
       {restaurant && user && (
         <Menu.Button className={menuaction()}>
-          <span>{restaurant.name || user.email}</span>
+          <span>{restaurant.name || user.name || user.email}</span>
           <ChevronDownIcon className={menudownicon()} aria-hidden={true} />
         </Menu.Button>
       )}

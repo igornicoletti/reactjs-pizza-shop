@@ -27,9 +27,13 @@ export const OrderPage = () => {
     .transform((page) => page - 1)
     .parse(searchParams.get('page') ?? '1')
 
+  const orderId = searchParams.get('orderId')
+  const customerName = searchParams.get('customerName')
+  const status = searchParams.get('status')
+
   const { data: order } = useQuery({
-    queryKey: ['order', pageIndex],
-    queryFn: () => OrderApi({ pageIndex })
+    queryKey: ['order', pageIndex, orderId, customerName, status],
+    queryFn: () => OrderApi({ pageIndex, orderId, customerName, status: status === 'all' ? null : status })
   })
 
   const handlePagination = (pageIndex: number) => {

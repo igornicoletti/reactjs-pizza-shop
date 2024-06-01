@@ -13,8 +13,11 @@ export type OrderProps = {
   }
 }
 
-export type OrderMetaProps = {
-  pageIndex: number
+export type OrderParamsProps = {
+  pageIndex?: number | null
+  orderId?: string | null
+  customerName?: string | null
+  status?: string | null
 }
 
 export type ProfileProps = {
