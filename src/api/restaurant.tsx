@@ -1,13 +1,5 @@
 import { api } from '../lib/axios'
-
-type Props = {
-  id: string
-  name: string
-  createdAt: Date | null
-  updatedAt: Date | null
-  description: string | null
-  managerId: string | null
-}
+import { RestaurantProps } from '../types'
 
 export const RestaurantApi = async () =>
-  await api.get<Props>('/managed-restaurant').then((res) => res.data)
+  await api.get<RestaurantProps>('/managed-restaurant').then((res) => res.data)

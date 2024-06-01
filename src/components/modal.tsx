@@ -2,8 +2,8 @@ import { Fragment } from 'react'
 import { XIcon } from 'lucide-react'
 import { Dialog, Transition } from '@headlessui/react'
 
-import { OrderProps } from '../routes/app/order'
 import { ModalVariants, OpacityVariants, ScaleVariants } from '../styles'
+import { OrderProps } from '../types'
 
 const { scaleenter, scaleenterto, scalefrom, scaleleave, scaleleavefrom, scaleleaveto } = ScaleVariants()
 const { opacityenter, opacityenterto, opacityfrom, opacityleave, opacityleavefrom, opacityleaveto } = OpacityVariants()
@@ -11,7 +11,7 @@ const { modalcontent, modalbackdrop, modaldialog, modalwrapper, modalpanel, moda
 
 type Props = {
   currentModal: boolean
-  currentOrder: OrderProps | undefined
+  currentOrder: OrderProps
   handleCloseModal: () => void
 }
 
@@ -31,7 +31,7 @@ export const ModalComponent = ({ currentModal, currentOrder, handleCloseModal }:
                 <div className={modalguide()}>
                   <div className={modalhead()}>
                     <Dialog.Title className={modaltitle()}>Detalhes do pedido</Dialog.Title>
-                    <Dialog.Description className={modaldescript()}>Pedido: {currentOrder?.identifier}</Dialog.Description>
+                    <Dialog.Description className={modaldescript()}>Pedido: {currentOrder?.orderId}</Dialog.Description>
                   </div>
                   <div className={modaloverflow()}>
                     <table className={modaltable()}>

@@ -3,8 +3,8 @@ import { useMutation } from '@tanstack/react-query'
 import { Form, Link, useSearchParams } from 'react-router-dom'
 
 import { SignInApi } from '../../api'
+import { SignInProps } from '../../types'
 import { UseToast } from '../../hooks/toast'
-import { SignInProps } from '../../api/signin'
 import { AuthVariants, FormVariants } from '../../styles'
 
 const { authcontent, authwrapper, authtitle, authdescript, authlink } = AuthVariants()

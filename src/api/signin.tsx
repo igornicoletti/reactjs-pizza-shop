@@ -1,8 +1,5 @@
 import { api } from '../lib/axios'
-
-export type SignInProps = {
-  email: string
-}
+import { SignInProps } from '../types'
 
 export const SignInApi = async ({ email }: SignInProps) =>
   await api.post('/authenticate', { email })

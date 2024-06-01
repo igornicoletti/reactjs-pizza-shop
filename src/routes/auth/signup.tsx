@@ -3,8 +3,8 @@ import { useMutation } from '@tanstack/react-query'
 import { Form, Link, useNavigate } from 'react-router-dom'
 
 import { SignUpApi } from '../../api'
+import { SignUpProps } from '../../types'
 import { UseToast } from '../../hooks/toast'
-import { RestaurantProps } from '../../api/signup'
 import { AuthVariants, FormVariants } from '../../styles'
 
 const { authcontent, authwrapper, authtitle, authdescript, authlink } = AuthVariants()
@@ -13,13 +13,13 @@ const { formcontent, formgroup, forminput, formlabel, formerror, formaction } = 
 export const SignUpPage = () => {
   const toast = UseToast()
   const navigate = useNavigate()
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<RestaurantProps>()
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<SignUpProps>()
 
   const { mutateAsync: subscribe } = useMutation({
     mutationFn: SignUpApi
   })
 
-  const handleSubmitForm = async ({ restaurant, name, email }: RestaurantProps) => {
+  const handleSubmitForm = async ({ restaurant, name, email }: SignUpProps) => {
     try {
       await subscribe({ restaurant, name, email })
       toast.success({

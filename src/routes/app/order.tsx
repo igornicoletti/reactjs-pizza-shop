@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
 import { FileSearchIcon, PizzaIcon, FrownIcon } from 'lucide-react'
 
-import { OrderApi } from '../../api/order'
+import { OrderApi } from '../../api'
 import { OrderVariants } from '../../styles'
 import { FilterComponent, PaginationComponent } from '../../components'
 
