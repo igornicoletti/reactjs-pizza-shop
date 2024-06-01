@@ -1,7 +1,7 @@
-import { PaginationVariants } from "../styles/variants"
+import { PaginationVariants } from "../styles"
 import { ChevronLeftIcon, ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon } from "lucide-react"
 
-const { pagingcontent, pagingwrapper, paginginfo, pagingnumb, paginggroup, pagingaction, pagingicon } = PaginationVariants()
+const { pagingcontent, pagingwrapper, paginggroup, pagingaction, pagingicon } = PaginationVariants()
 
 type Props = {
   pageIndex: number
@@ -15,14 +15,9 @@ export const PaginationComponent = ({ pageIndex, totalCount, peerPage, handlePag
 
   return (
     <div className={pagingcontent()}>
-      <p className={paginginfo()}>
-        Total de <span className={pagingnumb()}>{totalCount}</span> pedidos
-      </p>
+      <p><small>Total de <b>{totalCount}</b> pedidos</small></p>
       <div className={pagingwrapper()}>
-        <p className={paginginfo()}>
-          Página <span className={pagingnumb()}>{pageIndex + 1}</span>
-          de <span className={pagingnumb()}>{pages}</span>
-        </p>
+        <p><small>Página <b>{pageIndex + 1}</b> de <b>{pages}</b></small></p>
         <div className={paginggroup()}>
           <button className={pagingaction()} disabled={pageIndex === 0} onClick={() => handlePagination(0)}>
             <ChevronsLeftIcon className={pagingicon()} aria-hidden={true} />

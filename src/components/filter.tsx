@@ -3,23 +3,22 @@ import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronsUpDownIcon, FilterIcon, FilterXIcon } from 'lucide-react'
 
-import { BtnVariants, FormVariants, OpacityVariants } from '../styles/variants'
+import { FormVariants, OpacityVariants } from '../styles'
 
-const { btnaction } = BtnVariants()
-const { formcontent, formgroup, forminput, formlabel, formlist, formoptions, formoption, formselected, formicon } = FormVariants()
 const { opacityenter, opacityenterto, opacityfrom, opacityleave, opacityleavefrom, opacityleaveto } = OpacityVariants()
+const { formcontent, formgroup, forminput, formlabel, formlist, formoptions, formoption, formselected, formaction, formicon } = FormVariants()
 
-const people = [
-  { name: 'Status' },
-  { name: 'Pendente' },
-  { name: 'Preparação' },
-  { name: 'Entrega' },
-  { name: 'Concluído' },
-  { name: 'Cancelado' },
+const states = [
+  { state: 'Status' },
+  { state: 'Pendente' },
+  { state: 'Preparação' },
+  { state: 'Entrega' },
+  { state: 'Concluído' },
+  { state: 'Cancelado' }
 ]
 
 export const FilterComponent = () => {
-  const [selected, setSelected] = useState(people[0])
+  const [selected, setSelected] = useState(states[0])
 
   return (
     <Form className={formcontent({ display: 'row' })}>
@@ -34,31 +33,29 @@ export const FilterComponent = () => {
       <div className={formgroup()}>
         <Listbox value={selected} onChange={setSelected}>
           <Listbox.Label className={formlabel()}>
-            {selected.name !== 'Status' ? 'Status' : ''}
+            {selected.state !== 'Status' ? 'Status' : ''}
           </Listbox.Label>
           <Listbox.Button className={formlist()}>
-            <span>{selected.name}</span>
+            <span>{selected.state}</span>
             <ChevronsUpDownIcon className={formicon()} aria-hidden="true" />
           </Listbox.Button>
-          <Transition as={Fragment}
-            enter={opacityenter()} enterFrom={opacityfrom()} enterTo={opacityenterto()}
-            leave={opacityleave()} leaveFrom={opacityleavefrom()} leaveTo={opacityleaveto()}>
+          <Transition as={Fragment} enter={opacityenter()} enterFrom={opacityfrom()} enterTo={opacityenterto()} leave={opacityleave()} leaveFrom={opacityleavefrom()} leaveTo={opacityleaveto()}>
             <Listbox.Options className={formoptions()}>
-              {people.map((person, personIdx) => (
+              {states.map((person, personIdx) => (
                 <Listbox.Option key={personIdx} className={formoption()} value={person}>
                   <CheckIcon className={formselected()} />
-                  <span>{person.name}</span>
+                  <span>{person.state}</span>
                 </Listbox.Option>
               ))}
             </Listbox.Options>
           </Transition>
         </Listbox>
       </div>
-      <button className={btnaction({ color: 'inherit' })} type="submit">
+      <button className={formaction()} type="submit">
         <FilterIcon className={formicon()} />
         <span>Filtrar pedidos</span>
       </button>
-      <button className={btnaction({ color: 'inherit' })} type="submit">
+      <button className={formaction()} type="submit">
         <FilterXIcon className={formicon()} />
         <span>Limpar filtros</span>
       </button>

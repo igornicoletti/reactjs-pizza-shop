@@ -6,7 +6,7 @@ type Props = {
   email: string
   createdAt: Date | null
   updatedAt: Date | null
-  role: "manager" | "customer"
+  role: 'manager' | 'customer'
 }
 
 export const ProfileApi = async () =>

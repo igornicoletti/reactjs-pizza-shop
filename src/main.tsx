@@ -4,19 +4,11 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import './index.css'
-
 import { ErrorPage } from './error'
-
-import { AuthPage } from './routes/auth/root'
-import { SignInPage } from './routes/auth/signin'
-import { SignUpPage } from './routes/auth/signup'
-
-import { AppPage } from './routes/app/root'
-import { OrderPage } from './routes/app/order'
-import { DashboardPage } from './routes/app/dashboard'
-
 import { ToastsComponent } from './components/toast'
 import { ToastContextProvider } from './contexts/toast'
+import { AuthPage, SignInPage, SignUpPage } from './routes/auth'
+import { AppPage, DashboardPage, OrderPage } from './routes/app'
 
 const queryClient = new QueryClient()
 

@@ -3,7 +3,7 @@ import { XIcon } from 'lucide-react'
 import { Dialog, Transition } from '@headlessui/react'
 
 import { OrderProps } from '../routes/app/order'
-import { ModalVariants, OpacityVariants, ScaleVariants } from '../styles/variants'
+import { ModalVariants, OpacityVariants, ScaleVariants } from '../styles'
 
 const { scaleenter, scaleenterto, scalefrom, scaleleave, scaleleavefrom, scaleleaveto } = ScaleVariants()
 const { opacityenter, opacityenterto, opacityfrom, opacityleave, opacityleavefrom, opacityleaveto } = OpacityVariants()
@@ -21,16 +21,12 @@ export const ModalComponent = ({ currentModal, currentOrder, handleCloseModal }:
   return (
     <Transition appear show={currentModal} as={Fragment}>
       <Dialog className={modalcontent()} onClose={handleCloseModal}>
-        <Transition.Child as={Fragment}
-          enter={opacityenter()} enterFrom={opacityfrom()} enterTo={opacityenterto()}
-          leave={opacityleave()} leaveFrom={opacityleavefrom()} leaveTo={opacityleaveto()}>
+        <Transition.Child as={Fragment} enter={opacityenter()} enterFrom={opacityfrom()} enterTo={opacityenterto()} leave={opacityleave()} leaveFrom={opacityleavefrom()} leaveTo={opacityleaveto()}>
           <div className={modalbackdrop()} />
         </Transition.Child>
         <div className={modaldialog()}>
           <div className={modalwrapper()}>
-            <Transition.Child as={Fragment}
-              enter={scaleenter()} enterFrom={scalefrom()} enterTo={scaleenterto()}
-              leave={scaleleave()} leaveFrom={scaleleavefrom()} leaveTo={scaleleaveto()}>
+            <Transition.Child as={Fragment} enter={scaleenter()} enterFrom={scalefrom()} enterTo={scaleenterto()} leave={scaleleave()} leaveFrom={scaleleavefrom()} leaveTo={scaleleaveto()}>
               <Dialog.Panel className={modalpanel()}>
                 <div className={modalguide()}>
                   <div className={modalhead()}>

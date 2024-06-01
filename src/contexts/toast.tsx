@@ -5,13 +5,13 @@ export type ToastProps = {
   showing: boolean
   title: string
   description: string
-  type: 'default' | 'error' | 'info' | 'success' | 'warning'
+  type: 'info' | 'danger' | 'success' | 'warning'
 }
 
 export type ToastContextProps = {
   toast: ToastProps[]
-  handleHideToast: (data: ToastProps['id']) => void
-  handleShowToast: (data: Omit<ToastProps, 'id' | 'showing'>) => void
+  hideToast: (data: ToastProps['id']) => void
+  showToast: (data: Omit<ToastProps, 'id' | 'showing'>) => void
 }
 
 export const ToastContext = createContext({} as ToastContextProps)
@@ -33,7 +33,7 @@ export const ToastContextProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <ToastContext.Provider value={{ toast, handleShowToast, handleHideToast }}>
+    <ToastContext.Provider value={{ toast, showToast: handleShowToast, hideToast: handleHideToast }}>
       {children}
     </ToastContext.Provider>
   )

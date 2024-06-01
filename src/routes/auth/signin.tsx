@@ -2,43 +2,39 @@ import { useForm } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import { Form, Link, useSearchParams } from 'react-router-dom'
 
-import { SignInApi } from '../../api/signin'
+import { SignInApi } from '../../api'
 import { UseToast } from '../../hooks/toast'
-import { AuthVariants, BtnVariants, FormVariants } from '../../styles/variants'
+import { SignInProps } from '../../api/signin'
+import { AuthVariants, FormVariants } from '../../styles'
 
-const { btnaction } = BtnVariants()
-const { formcontent, formgroup, forminput, formlabel, formerror } = FormVariants()
 const { authcontent, authwrapper, authtitle, authdescript, authlink } = AuthVariants()
-
-type FormProps = {
-  email: string
-}
+const { formcontent, formgroup, forminput, formlabel, formerror, formaction } = FormVariants()
 
 export const SignInPage = () => {
   const toast = UseToast()
 
   const [searchParams] = useSearchParams()
 
-  const { mutateAsync: authenticate } = useMutation({ mutationFn: SignInApi })
+  const { mutateAsync: authenticate } = useMutation({
+    mutationFn: SignInApi
+  })
 
-  const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<FormProps>({
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<SignInProps>({
     defaultValues: { email: searchParams.get('email') ?? '' }
   })
 
-  const handleSubmitForm = async (data: FormProps) => {
+  const handleSubmitForm = async ({ email }: SignInProps) => {
     try {
-      await authenticate({ email: data.email })
+      await authenticate({ email })
       toast.success({
         title: 'Verifique seu e-mail!',
-        description: `Um link de autenticação foi enviado para o e-mail ${data.email}.`
+        description: `Um link de autenticação foi enviado para o e-mail ${email}.`
       })
-      reset()
     } catch {
-      toast.error({
+      toast.danger({
         title: 'Credenciais inválidas!',
-        description: `${data.email} não correspondem aos nossos registros. Cadastre-se.`
+        description: `${email} não existe em nossos registros. Cadastre-se.`
       })
-      reset()
     }
   }
 
@@ -53,7 +49,7 @@ export const SignInPage = () => {
             <label className={formlabel()} htmlFor='email'>E-mail</label>
             {errors.email && <span className={formerror()}>{errors.email.message}</span>}
           </div>
-          <button className={btnaction({ color: 'cyan' })} disabled={!watch('email')} type="submit">Acessar</button>
+          <button className={formaction()} disabled={!watch('email')} type="submit">Acessar</button>
         </Form>
         <p className={authdescript()}>Não tem uma conta?{' '}<Link to={'/signup'} className={authlink()}>Cadastre-se.</Link></p>
       </div>

@@ -1,10 +1,10 @@
 import { api } from '../lib/axios'
 
-type Props = {
-  restaurantName: string
-  managerName: string
+export type RestaurantProps = {
+  restaurant: string
+  name: string
   email: string
 }
 
-export const SignUpApi = async ({ restaurantName, managerName, email }: Props) =>
-  await api.post('/restaurants', { restaurantName, managerName, email })
+export const SignUpApi = async ({ restaurant, name, email }: RestaurantProps) =>
+  await api.post('/restaurants', { restaurant, name, email })

@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 
-import { RootVariants } from '../../styles/variants'
-import { HeaderComponent } from '../../components/header'
+import { RootVariants } from '../../styles'
+import { HeaderComponent } from '../../components'
 
 const { rootlayout, rootcontainer } = RootVariants()
 

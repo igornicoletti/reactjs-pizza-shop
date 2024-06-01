@@ -6,9 +6,8 @@ import { useSearchParams } from 'react-router-dom'
 import { FileSearchIcon, PizzaIcon, FrownIcon } from 'lucide-react'
 
 import { OrderApi } from '../../api/order'
-import { OrderVariants } from '../../styles/variants'
-import { FilterComponent } from '../../components/filter'
-import { PaginationComponent } from '../../components/pagination'
+import { OrderVariants } from '../../styles'
+import { FilterComponent, PaginationComponent } from '../../components'
 
 const { ordercontent, orderwrapper, ordertitle, orderguide, ordertooltip, orderoverflow, ordertable, orderthead, ordertbody, ordertfoot, orderrow, ordericon, orderstatus, ordersteps, orderaction } = OrderVariants()
 

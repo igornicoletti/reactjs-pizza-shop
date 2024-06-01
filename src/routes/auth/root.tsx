@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import { RootVariants } from '../../styles/variants'
+import { RootVariants } from '../../styles'
 
 const { rootlayout, rootcontainer } = RootVariants()
 

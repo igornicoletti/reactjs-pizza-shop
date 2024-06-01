@@ -1,4 +1,4 @@
-import { DashboardVariants } from '../../styles/variants'
+import { DashboardVariants } from '../../styles'
 import { CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 const { dashcontent, dashwrapper, dashtitle, dashguide, dashdata, dashchart, dashcardlt, dashcardrt, dashcard, dashinfo, dashvalue, dashdescript } = DashboardVariants()
@@ -131,7 +131,7 @@ export const DashboardPage = () => {
               <p className={dashinfo()}>Mais vendidos</p>
               <ResponsiveContainer width={'100%'} height={350}>
                 <PieChart>
-                  <Pie cx={'50%'} cy={'50%'} stroke={'#2b2d39'} dataKey={'amount'} nameKey={'product'} strokeWidth={10} labelLine={false} outerRadius={150} innerRadius={125} data={pieData} label={labelPieChart} >
+                  <Pie cx={'50%'} cy={'50%'} stroke={'#2b2d39'} dataKey={'amount'} nameKey={'product'} strokeWidth={10} labelLine={false} outerRadius={150} innerRadius={115} data={pieData} label={labelPieChart} >
                     {pieData.map((data) => (
                       <Cell key={data.id} fill={pieColors[data.id % pieColors.length]} />
                     ))}
