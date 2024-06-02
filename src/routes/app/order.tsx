@@ -11,13 +11,7 @@ import { FilterComponent, PaginationComponent } from '../../components'
 
 const { ordercontent, orderwrapper, ordertitle, orderguide, ordertooltip, orderoverflow, ordertable, orderthead, ordertbody, ordertfoot, orderrow, ordericon, orderstatus, ordersteps, orderaction } = OrderVariants()
 
-const orderStatus = {
-  pending: 'Pendente',
-  processing: 'Preparação',
-  delivering: 'Entrega',
-  delivered: 'Concluído',
-  canceled: 'Cancelado',
-}
+const orderStatus = { pending: 'Pendente', processing: 'Preparação', delivering: 'Entrega', delivered: 'Concluído', canceled: 'Cancelado' }
 
 export const OrderPage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -26,14 +20,15 @@ export const OrderPage = () => {
     .number()
     .transform((page) => page - 1)
     .parse(searchParams.get('page') ?? '1')
-
   const orderId = searchParams.get('orderId')
   const customerName = searchParams.get('customerName')
   const status = searchParams.get('status')
 
   const { data: order } = useQuery({
     queryKey: ['order', pageIndex, orderId, customerName, status],
-    queryFn: () => OrderApi({ pageIndex, orderId, customerName, status: status === 'all' ? null : status })
+    queryFn: () => OrderApi({
+      pageIndex, orderId, customerName, status: status === 'all' ? null : status
+    })
   })
 
   const handlePagination = (pageIndex: number) => {
