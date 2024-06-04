@@ -24,26 +24,31 @@ export const OrderVariants = tv({
         orderstatus: 'marker:text-in-cyan',
         orderaction: 'hover:text-in-cyan',
         ordertooltip: 'border-in-cyan',
+        ordericon: 'text-in-cyan',
       },
       processing: {
         orderstatus: 'marker:text-in-purple',
         orderaction: 'hover:text-in-purple',
         ordertooltip: 'border-in-purple',
+        ordericon: 'text-in-purple',
       },
       delivering: {
-        orderstatus: 'marker:text-in-orange',
-        orderaction: 'hover:text-in-orange',
-        ordertooltip: 'border-in-orange',
+        orderstatus: 'marker:text-in-yellow',
+        orderaction: 'hover:text-in-yellow',
+        ordertooltip: 'border-in-yellow',
+        ordericon: 'text-in-yellow',
       },
       delivered: {
         orderstatus: 'marker:text-in-green',
         orderaction: 'hover:text-in-green',
         ordertooltip: 'border-in-green',
+        ordericon: 'text-in-green',
       },
       canceled: {
         orderstatus: 'marker:text-in-red',
         orderaction: 'hover:text-in-red',
         ordertooltip: 'border-in-red',
+        ordericon: 'text-in-red',
       },
     }
   }

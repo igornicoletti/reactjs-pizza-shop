@@ -49,7 +49,7 @@ export const SignInPage = () => {
             <label className={formlabel()} htmlFor='email'>E-mail</label>
             {errors.email && <span className={formerror()}>{errors.email.message}</span>}
           </div>
-          <button className={formaction()} disabled={!watch('email')} type="submit">Acessar</button>
+          <button className={formaction({ color: 'primary' })} disabled={!watch('email')} type='submit'>Acessar</button>
         </Form>
         <p className={authdescript()}>Não tem uma conta?{' '}<Link to={'/signup'} className={authlink()}>Cadastre-se.</Link></p>
       </div>

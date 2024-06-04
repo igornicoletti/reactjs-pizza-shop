@@ -10,14 +10,7 @@ import { FormVariants, OpacityVariants } from '../styles'
 const { opacityenter, opacityenterto, opacityfrom, opacityleave, opacityleavefrom, opacityleaveto } = OpacityVariants()
 const { formcontent, formgroup, forminput, formlabel, formlist, formoptions, formoption, formselected, formaction, formicon } = FormVariants()
 
-const statusData = [
-  { id: 'all', name: 'Todos status' },
-  { id: 'pending', name: 'Pendente' },
-  { id: 'processing', name: 'Preparação' },
-  { id: 'delivering', name: 'Entrega' },
-  { id: 'delivered', name: 'Concluído' },
-  { id: 'canceled', name: 'Cancelado' }
-]
+const statusData = [{ id: 'all', name: 'Todos status' }, { id: 'pending', name: 'Pendente' }, { id: 'processing', name: 'Preparo' }, { id: 'delivering', name: 'Entrega' }, { id: 'delivered', name: 'Concluído' }, { id: 'canceled', name: 'Cancelado' }]
 
 export const FilterComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -27,11 +20,7 @@ export const FilterComponent = () => {
   const status = searchParams.get('status')
 
   const { register, handleSubmit, reset, control } = useForm<OrderParamsProps>({
-    defaultValues: {
-      orderId: orderId ?? '',
-      customerName: customerName ?? '',
-      status: status ?? 'all'
-    }
+    defaultValues: { orderId: orderId ?? '', customerName: customerName ?? '', status: status ?? 'all' }
   })
 
   const handleSubmitFilter = ({ orderId, customerName, status }: OrderParamsProps) => {
@@ -71,7 +60,7 @@ export const FilterComponent = () => {
             {value !== 'all' && <Listbox.Label className={formlabel()}>Status</Listbox.Label>}
             <Listbox.Button className={formlist()}>
               <span>{statusData.find((data) => data.id === value)?.name}</span>
-              <ChevronsUpDownIcon className={formicon()} aria-hidden="true" />
+              <ChevronsUpDownIcon className={formicon()} aria-hidden='true' />
             </Listbox.Button>
             <Transition as={Fragment} enter={opacityenter()} enterFrom={opacityfrom()} enterTo={opacityenterto()} leave={opacityleave()} leaveFrom={opacityleavefrom()} leaveTo={opacityleaveto()}>
               <Listbox.Options className={formoptions()}>
@@ -86,11 +75,11 @@ export const FilterComponent = () => {
           </Listbox>
         )} />
       </div>
-      <button className={formaction()} type="submit">
+      <button className={formaction({ color: 'default' })} type='submit'>
         <FilterIcon className={formicon()} />
         <span>Filtrar pedidos</span>
       </button>
-      <button className={formaction()} onClick={handleClearFilter}>
+      <button className={formaction({ color: 'default' })} onClick={handleClearFilter}>
         <FilterXIcon className={formicon()} />
         <span>Limpar filtros</span>
       </button>

@@ -1,3 +1,26 @@
+export type OrderIdProps = {
+  status: 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered'
+  id: string
+  createdAt: string
+  totalInCents: number
+  customer: {
+    name: string
+    email: string
+  },
+  orderItems: {
+    id: string
+    priceInCents: number
+    quantity: number
+    product: {
+      name: string
+    }
+  }[]
+}
+
+export type OrderIdParamsProps = {
+  orderId: string
+}
+
 export type OrderProps = {
   orders: {
     orderId: string
@@ -46,4 +69,12 @@ export type SignUpProps = {
   restaurant: string
   name: string
   email: string
+}
+
+export type ToastProps = {
+  id: number
+  showing: boolean
+  title: string
+  description: string
+  type: 'info' | 'danger' | 'success' | 'warning'
 }

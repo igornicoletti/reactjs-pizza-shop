@@ -11,7 +11,7 @@ export const FormVariants = tv({
     formoption: 'group flex items-center gap-2 p-2 rounded hover:bg-in-cyan hover:text-in-dark focus:outline-none transition ease-in-out duration-300',
     formselected: 'size-4 shrink-0 invisible ui-selected:visible text-in-cyan group-hover:text-in-dark',
     formerror: 'absolute -bottom-2 right-2 px-4 bg-in-dark text-in-white text-xs',
-    formaction: 'flex items-center justify-center text-nowrap gap-2 h-12 py-2 px-6 font-semibold rounded border border-in-cyan bg-in-cyan text-in-dark disabled:bg-inherit disabled:text-in-white disabled:cursor-not-allowed focus:outline-none transform disabled:scale-100 active:scale-90 transition ease-in-out duration-300',
+    formaction: 'flex items-center justify-center text-nowrap gap-2 h-12 py-2 px-6 font-medium rounded border border-in-cyan disabled:bg-inherit disabled:text-in-white disabled:cursor-not-allowed focus:outline-none transform disabled:scale-100 active:scale-90 transition ease-in-out duration-300',
     formicon: 'size-4 shrink-0 -mt-1',
   },
   variants: {
@@ -19,6 +19,14 @@ export const FormVariants = tv({
       row: {
         formcontent: 'lg:flex-row'
       }
+    },
+    color: {
+      default: {
+        formaction: ' bg-inherit text-in-white hover:bg-in-cyan hover:text-in-dark'
+      },
+      primary: {
+        formaction: ' bg-in-cyan text-in-dark'
+      },
     }
   }
 })

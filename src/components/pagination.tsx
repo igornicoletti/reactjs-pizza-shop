@@ -1,5 +1,5 @@
-import { PaginationVariants } from "../styles"
-import { ChevronLeftIcon, ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon } from "lucide-react"
+import { PaginationVariants } from '../styles'
+import { ChevronLeftIcon, ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon } from 'lucide-react'
 
 const { pagingcontent, pagingwrapper, paginggroup, pagingaction, pagingicon } = PaginationVariants()
 

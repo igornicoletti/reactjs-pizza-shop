@@ -1,14 +1,7 @@
+import { ToastProps } from '../types'
 import { ReactNode, createContext, useState } from 'react'
 
-export type ToastProps = {
-  id: number
-  showing: boolean
-  title: string
-  description: string
-  type: 'info' | 'danger' | 'success' | 'warning'
-}
-
-export type ToastContextProps = {
+type ToastContextProps = {
   toast: ToastProps[]
   hideToast: (data: ToastProps['id']) => void
   showToast: (data: Omit<ToastProps, 'id' | 'showing'>) => void

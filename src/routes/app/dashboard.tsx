@@ -6,27 +6,27 @@ const { dashcontent, dashwrapper, dashtitle, dashguide, dashdata, dashchart, das
 const cardData = [
   {
     id: 1,
-    title: "Pedidos",
+    title: 'Pedidos',
     value: '38',
-    descript: "+20.1% em relação ao dia anterior"
+    descript: '+20.1% em relação ao dia anterior'
   },
   {
     id: 2,
-    title: "Concluídos",
+    title: 'Concluídos',
     value: '124',
-    descript: "+18.1% em relação ao mês passado"
+    descript: '+18.1% em relação ao mês passado'
   },
   {
     id: 3,
-    title: "Cancelados",
+    title: 'Cancelados',
     value: '12',
-    descript: "-8% em relação ao mês passado"
+    descript: '-8% em relação ao mês passado'
   },
   {
     id: 4,
-    title: "Faturamento",
+    title: 'Faturamento',
     value: 'R$ 1448.60',
-    descript: "+38% em relação ao mês passado"
+    descript: '+38% em relação ao mês passado'
   }
 ]
 

@@ -7,7 +7,7 @@ const errorVariants = tv({
     container: 'w-full max-w-screen-xl mx-auto px-8',
     content: 'flex flex-col items-center text-center py-16',
     status: 'text-4xl capitalize pb-12',
-    title: 'font-semibold pb-4',
+    title: 'font-medium pb-4',
     info: 'text-sm lg:text-base',
   }
 })
