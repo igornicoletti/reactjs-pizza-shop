@@ -12,20 +12,16 @@ const { formcontent, formgroup, forminput, formlabel, formerror, formaction } = 
 
 export const SignInPage = () => {
   const toast = UseToast()
-
   const [searchParams] = useSearchParams()
 
-  const { mutateAsync: authenticate } = useMutation({
-    mutationFn: SignInApi
-  })
-
+  const { mutateAsync: signin } = useMutation({ mutationFn: SignInApi })
   const { register, handleSubmit, watch, formState: { errors } } = useForm<SignInProps>({
     defaultValues: { email: searchParams.get('email') ?? '' }
   })
 
   const handleSubmitForm = async ({ email }: SignInProps) => {
     try {
-      await authenticate({ email })
+      await signin({ email })
       toast.success({
         title: 'Verifique seu e-mail!',
         description: `Um link de autenticação foi enviado para o e-mail ${email}.`
@@ -44,8 +40,7 @@ export const SignInPage = () => {
         <h1 className={authtitle()}>Entrar</h1>
         <Form className={formcontent()} onSubmit={handleSubmit(handleSubmitForm)}>
           <div className={formgroup()}>
-            <input className={forminput()} type='email' id='email' placeholder=' '
-              {...register('email', { required: { value: true, message: 'Por favor, informe um e-mail' } })} />
+            <input className={forminput()} type='email' id='email' placeholder=' '{...register('email', { required: { value: true, message: 'Por favor, informe um e-mail' } })} />
             <label className={formlabel()} htmlFor='email'>E-mail</label>
             {errors.email && <span className={formerror()}>{errors.email.message}</span>}
           </div>

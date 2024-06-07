@@ -12,13 +12,12 @@ const { dialogcontent, dialogbackdrop, dialogdialog, dialogwrapper, dialogpanel,
 
 type Props = {
   dialog: boolean
-  dialogOrderId: string
+  dialogOrderId: string | null
   handleDialog: (orderId: string) => void
 }
 
 export const DialogComponent = ({ dialog, dialogOrderId: orderId, handleDialog }: Props) => {
   const { data: order } = useQuery({
-    enabled: dialog,
     queryKey: ['order', orderId],
     queryFn: () => OrderIdApi({ orderId })
   })

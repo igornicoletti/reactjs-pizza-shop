@@ -7,7 +7,7 @@ export const DialogVariants = tv({
     dialogdialog: 'fixed inset-0 overflow-y-auto',
     dialogwrapper: 'flex min-h-full items-center justify-center p-4',
     dialogpanel: 'relative w-full max-w-5xl mx-auto p-4 rounded shadow-lg bg-in-slate',
-    dialogguide: 'w-full flex flex-col gap-6',
+    dialogguide: 'w-full flex flex-col gap-8',
     dialoghead: 'w-full flex flex-col gap-4',
     dialogtitle: 'text-xl md:text-2xl font-medium',
     dialogdescript: 'font-medium text-in-cyan',

@@ -1,4 +1,4 @@
-export { OrderApi, OrderIdApi } from './order'
+export { OrderApi, OrderIdApi, OrderCancelApi } from './order'
 export { ProfileApi } from './profile'
 export { RestaurantApi } from './restaurant'
 export { SignInApi } from './signin'

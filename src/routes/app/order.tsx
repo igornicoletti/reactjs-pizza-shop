@@ -1,36 +1,56 @@
 import { z } from 'zod'
+import { useState } from 'react'
 import { ptBR } from 'date-fns/locale'
 import { formatDistanceToNow } from 'date-fns'
-import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
-import { FileSearchIcon, PizzaIcon, XIcon } from 'lucide-react'
+import { BanIcon, FileSearchIcon, PizzaIcon } from 'lucide-react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { OrderApi } from '../../api'
+import { OrderProps } from '../../types'
 import { OrderVariants } from '../../styles'
+import { OrderApi, OrderCancelApi } from '../../api'
 import { DialogComponent, FilterComponent, PaginationComponent } from '../../components'
-import { useState } from 'react'
 
-const { ordercontent, orderwrapper, ordertitle, orderguide, ordertooltip, orderoverflow, ordertable, orderthead, ordertbody, ordertfoot, orderrow, ordericon, orderstatus, ordersteps, orderaction } = OrderVariants()
+const { ordercontent, orderwrapper, ordertitle, orderguide, ordertooltip, orderoverflow, ordertable, ordercol, orderthead, ordertbody, ordertfoot, orderrow, ordericon, orderstatus, orderping, ordersteps, orderaction } = OrderVariants()
 
 const statusData = { pending: 'Pendente', processing: 'Preparo', delivering: 'Entrega', delivered: 'Concluído', canceled: 'Cancelado' }
 
 export const OrderPage = () => {
+  const queryClient = useQueryClient()
   const [searchParams, setSearchParams] = useSearchParams()
 
   const [dialog, setDialog] = useState<boolean>(false)
-  const [dialogOrderId, setDialogOrderId] = useState<string>('')
+  const [dialogOrderId, setDialogOrderId] = useState<string | null>(null)
 
+  const status = searchParams.get('status')
+  const orderId = searchParams.get('orderId')
+  const customerName = searchParams.get('customerName')
   const pageIndex = z.coerce
     .number()
     .transform((page) => page - 1)
     .parse(searchParams.get('page') ?? '1')
-  const orderId = searchParams.get('orderId')
-  const customerName = searchParams.get('customerName')
-  const status = searchParams.get('status')
 
   const { data: order } = useQuery({
     queryKey: ['order', pageIndex, orderId, customerName, status],
     queryFn: () => OrderApi({ pageIndex, orderId, customerName, status: status === 'all' ? null : status })
+  })
+
+  const { mutateAsync: ordercancel } = useMutation({
+    mutationFn: OrderCancelApi,
+    async onSuccess(_, { orderId }) {
+      const onderListCache = queryClient.getQueriesData<OrderProps>({ queryKey: ['order'] })
+
+      onderListCache.forEach(([cacheKey, cacheData]) => {
+        if (!cacheData) return
+
+        queryClient.setQueryData<OrderProps>(cacheKey, {
+          ...cacheData,
+          orders: cacheData.orders.map((data) => data.orderId === orderId
+            ? { ...data, status: 'canceled' }
+            : data)
+        })
+      })
+    }
   })
 
   const handleDialog = (orderId: string) => {
@@ -54,6 +74,9 @@ export const OrderPage = () => {
             <FilterComponent />
             <div className={orderoverflow()}>
               <table className={ordertable()}>
+                <colgroup className={ordercol()}>
+                  {Array.from({ length: 7 }).map((_, i) => (<col key={i} />))}
+                </colgroup>
                 <thead className={orderthead()}>
                   <tr className={orderrow()}>
                     <th scope='col'>Dados</th>
@@ -78,16 +101,25 @@ export const OrderPage = () => {
                         <td>{data.orderId}</td>
                         <td>{data.customerName}</td>
                         <td>{formatDistanceToNow(data.createdAt, { locale: ptBR, addSuffix: true })}</td>
-                        <td><li className={orderstatus({ color: data.status })}>{statusData[data.status]}</li></td>
+                        <td>
+                          <div className={orderstatus()}>
+                            <div className={orderping({ color: data.status })}><div /></div>
+                            <span>{statusData[data.status]}</span>
+                          </div>
+                        </td>
                         <td>{(data.total / 100).toLocaleString('pt-br', { currency: 'BRL', style: 'currency' })}</td>
                         <td>
                           <div className={ordersteps()}>
                             <button className={orderaction({ color: data.status })}>
                               <PizzaIcon className={ordericon()} aria-hidden={true} />
-                              <span className={ordertooltip({ color: data.status })}>{statusData[data.status]}</span>
+                              <span className={ordertooltip({ color: data.status })}>
+                                {statusData[data.status]}
+                              </span>
                             </button>
-                            <button className={orderaction({ color: 'canceled' })}>
-                              <XIcon className={ordericon()} aria-hidden={true} />
+                            <button className={orderaction({ color: 'canceled' })}
+                              onClick={() => ordercancel({ orderId: data.orderId })}
+                              disabled={!['pending', 'processing'].includes(data.status)}>
+                              <BanIcon className={ordericon()} aria-hidden={true} />
                               <span className={ordertooltip({ color: 'canceled' })}>Cancelar</span>
                             </button>
                           </div>
@@ -111,7 +143,7 @@ export const OrderPage = () => {
           </div>
         }
       </div>
-      <DialogComponent dialog={dialog} dialogOrderId={dialogOrderId} handleDialog={handleDialog} />
+      {dialogOrderId && <DialogComponent dialog={dialog} dialogOrderId={dialogOrderId} handleDialog={handleDialog} />}
     </div>
   )
 }

@@ -15,9 +15,9 @@ const statusData = [{ id: 'all', name: 'Todos status' }, { id: 'pending', name: 
 export const FilterComponent = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
+  const status = searchParams.get('status')
   const orderId = searchParams.get('orderId')
   const customerName = searchParams.get('customerName')
-  const status = searchParams.get('status')
 
   const { register, handleSubmit, reset, control } = useForm<OrderParamsProps>({
     defaultValues: { orderId: orderId ?? '', customerName: customerName ?? '', status: status ?? 'all' }
@@ -47,18 +47,18 @@ export const FilterComponent = () => {
   return (
     <Form className={formcontent({ display: 'row' })} onSubmit={handleSubmit(handleSubmitFilter)}>
       <div className={formgroup()}>
-        <input className={forminput()} type='text' id='orderId' placeholder=' ' {...register('orderId')} />
-        <label className={formlabel()} htmlFor='orderId'>Identificador</label>
+        <input className={forminput()} type={'text'} id={'orderId'} placeholder={' '} {...register('orderId')} />
+        <label className={formlabel()} htmlFor={'orderId'}>Identificador</label>
       </div>
       <div className={formgroup()}>
-        <input className={forminput()} type='text' id='customerName' placeholder=' ' {...register('customerName')} />
-        <label className={formlabel()} htmlFor='customerName'>Nome do cliente</label>
+        <input className={forminput()} type={'text'} id={'customerName'} placeholder={' '} {...register('customerName')} />
+        <label className={formlabel()} htmlFor={'customerName'}>Nome do cliente</label>
       </div>
       <div className={formgroup()}>
         <Controller control={control} name={'status'} render={({ field: { name, value, onChange } }) => (
           <Listbox name={name} value={value} onChange={onChange}>
-            {value !== 'all' && <Listbox.Label className={formlabel()}>Status</Listbox.Label>}
-            <Listbox.Button className={formlist()}>
+            {value !== 'all' && <Listbox.Label className={formlabel()} htmlFor={name}>Status</Listbox.Label>}
+            <Listbox.Button className={formlist()} id={name}>
               <span>{statusData.find((data) => data.id === value)?.name}</span>
               <ChevronsUpDownIcon className={formicon()} aria-hidden='true' />
             </Listbox.Button>
@@ -79,7 +79,7 @@ export const FilterComponent = () => {
         <FilterIcon className={formicon()} />
         <span>Filtrar pedidos</span>
       </button>
-      <button className={formaction({ color: 'default' })} onClick={handleClearFilter}>
+      <button className={formaction({ color: 'default' })} type='submit' onClick={handleClearFilter}>
         <FilterXIcon className={formicon()} />
         <span>Limpar filtros</span>
       </button>

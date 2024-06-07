@@ -14,11 +14,13 @@ export const MenuComponent = () => {
   const navigate = useNavigate()
 
   const { data: user } = useQuery({
-    queryKey: ['profile'], queryFn: ProfileApi
+    queryKey: ['profile'],
+    queryFn: ProfileApi
   })
 
   const { data: restaurant } = useQuery({
-    queryKey: ['restaurant'], queryFn: RestaurantApi
+    queryKey: ['restaurant'],
+    queryFn: RestaurantApi
   })
 
   const { mutateAsync: signout } = useMutation({

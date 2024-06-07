@@ -6,3 +6,6 @@ export const OrderApi = async ({ pageIndex, orderId, customerName, status }: Ord
 
 export const OrderIdApi = async ({ orderId }: OrderIdParamsProps) =>
   await api.get<OrderIdProps>(`/orders/${orderId}`).then((res) => res.data)
+
+export const OrderCancelApi = async ({ orderId }: OrderIdParamsProps) =>
+  await api.patch(`/orders/${orderId}/cancel`)

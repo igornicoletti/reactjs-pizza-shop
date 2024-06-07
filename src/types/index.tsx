@@ -1,26 +1,3 @@
-export type OrderIdProps = {
-  status: 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered'
-  id: string
-  createdAt: string
-  totalInCents: number
-  customer: {
-    name: string
-    email: string
-  },
-  orderItems: {
-    id: string
-    priceInCents: number
-    quantity: number
-    product: {
-      name: string
-    }
-  }[]
-}
-
-export type OrderIdParamsProps = {
-  orderId: string
-}
-
 export type OrderProps = {
   orders: {
     orderId: string
@@ -41,6 +18,29 @@ export type OrderParamsProps = {
   orderId?: string | null
   customerName?: string | null
   status?: string | null
+}
+
+export type OrderIdProps = {
+  status: 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered'
+  id: string
+  createdAt: string
+  totalInCents: number
+  customer: {
+    name: string
+    email: string
+  },
+  orderItems: {
+    id: string
+    priceInCents: number
+    quantity: number
+    product: {
+      name: string
+    }
+  }[]
+}
+
+export type OrderIdParamsProps = {
+  orderId: string | null
 }
 
 export type ProfileProps = {
@@ -77,4 +77,14 @@ export type ToastProps = {
   title: string
   description: string
   type: 'info' | 'danger' | 'success' | 'warning'
+}
+
+export type RechartsProps = {
+  cx: string
+  cy: string
+  midAngle: string
+  innerRadius: number
+  outerRadius: number
+  value: string
+  index: number
 }
