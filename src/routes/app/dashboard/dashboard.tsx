@@ -1,7 +1,7 @@
 import { CartesianGrid, Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
-import { RechartsProps } from '../../types'
-import { DashboardVariants } from '../../styles'
+import { RechartsProps } from '../../../types'
+import { DashboardVariants } from '../../../styles'
 
 const { dashcontent, dashwrapper, dashtitle, dashguide, dashdata, dashchart, dashcardlt, dashcardrt, dashcard, dashinfo, dashvalue, dashdescript } = DashboardVariants()
 

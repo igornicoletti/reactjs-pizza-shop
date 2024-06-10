@@ -4,26 +4,26 @@ import { Listbox, Transition } from '@headlessui/react'
 import { Form, useSearchParams } from 'react-router-dom'
 import { CheckIcon, ChevronsUpDownIcon, FilterIcon, FilterXIcon } from 'lucide-react'
 
-import { OrderParamsProps } from '../types'
-import { FormVariants, OpacityVariants } from '../styles'
+import { FilterProps } from '../../../types'
+import { FormVariants, OpacityVariants } from '../../../styles'
 
 const { opacityenter, opacityenterto, opacityfrom, opacityleave, opacityleavefrom, opacityleaveto } = OpacityVariants()
 const { formcontent, formgroup, forminput, formlabel, formlist, formoptions, formoption, formselected, formaction, formicon } = FormVariants()
 
 const statusData = [{ id: 'all', name: 'Todos status' }, { id: 'pending', name: 'Pendente' }, { id: 'processing', name: 'Preparo' }, { id: 'delivering', name: 'Entrega' }, { id: 'delivered', name: 'Concluído' }, { id: 'canceled', name: 'Cancelado' }]
 
-export const FilterComponent = () => {
+export const OrderPageFilter = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const status = searchParams.get('status')
   const orderId = searchParams.get('orderId')
   const customerName = searchParams.get('customerName')
 
-  const { register, handleSubmit, reset, control } = useForm<OrderParamsProps>({
+  const { register, handleSubmit, reset, control } = useForm<FilterProps>({
     defaultValues: { orderId: orderId ?? '', customerName: customerName ?? '', status: status ?? 'all' }
   })
 
-  const handleSubmitFilter = ({ orderId, customerName, status }: OrderParamsProps) => {
+  const handleSubmitFilter = ({ orderId, customerName, status }: FilterProps) => {
     setSearchParams((state) => {
       state.set('page', '1')
       orderId ? state.set('orderId', orderId) : state.delete('orderId')

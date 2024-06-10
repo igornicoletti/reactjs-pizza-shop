@@ -1,8 +1,10 @@
+export type OrderStatusProps = 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered'
+
 export type OrderProps = {
   orders: {
     orderId: string
     createdAt: string
-    status: 'canceled' | 'delivered' | 'delivering' | 'pending' | 'processing'
+    status: OrderStatusProps
     customerName: string
     total: number
   }[]
@@ -13,15 +15,12 @@ export type OrderProps = {
   }
 }
 
-export type OrderParamsProps = {
-  pageIndex?: number | null
-  orderId?: string | null
-  customerName?: string | null
-  status?: string | null
+export type OrderIdProps = {
+  orderId: string
 }
 
-export type OrderIdProps = {
-  status: 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered'
+export type DetailProps = {
+  status: OrderStatusProps
   id: string
   createdAt: string
   totalInCents: number
@@ -39,8 +38,11 @@ export type OrderIdProps = {
   }[]
 }
 
-export type OrderIdParamsProps = {
-  orderId: string | null
+export type FilterProps = {
+  pageIndex?: number | null
+  orderId?: string | null
+  customerName?: string | null
+  status?: string | null
 }
 
 export type ProfileProps = {

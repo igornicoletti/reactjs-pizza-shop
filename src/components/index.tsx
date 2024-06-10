@@ -1,6 +1,3 @@
-export { DialogComponent } from './dialog'
-export { FilterComponent } from './filter'
 export { HeaderComponent } from './header'
 export { MenuComponent } from './menu'
-export { PaginationComponent } from './pagination'
 export { ToastsComponent } from './toast'

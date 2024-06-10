@@ -15,7 +15,7 @@ export const ToastContextProvider = ({ children }: { children: ReactNode }) => {
   const handleShowToast = ({ title, description, type }: Omit<ToastProps, 'id' | 'showing'>) => {
     const toastId = Date.now()
     setToast((state) => [...state, { id: toastId, showing: true, title, description, type }])
-    setTimeout(() => handleHideToast(toastId), 4000)
+    setTimeout(() => handleHideToast(toastId), 2500)
   }
 
   const handleHideToast = (id: ToastProps['id']) => {

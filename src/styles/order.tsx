@@ -16,8 +16,8 @@ export const OrderVariants = tv({
     orderstatus: 'flex items-center gap-2',
     orderping: 'rounded-full p-0.5 *:rounded-full *:h-1.5 *:w-1.5 -mt-0.5',
     ordersteps: 'flex items-center justify-center gap-4',
-    orderaction: 'group relative px-2 disabled:hidden focus:outline-none transition ease-in-out duration-300',
-    ordertooltip: 'absolute z-10 px-2 py-1 rounded shadow-lg text-xs md:text-sm font-medium left-2/4 -translate-x-2/4 -top-full -translate-y-2/3 group-hover:border-b-2 bg-in-cyan/10 border-in-cyan text-in-white invisible group-hover:visible',
+    orderaction: 'group relative px-2 disabled:cursor-not-allowed focus:outline-none transition ease-in-out duration-300',
+    ordertooltip: 'absolute z-10 px-2 py-1 rounded shadow-md text-xs md:text-sm font-medium left-2/4 -translate-x-2/4 -top-full -translate-y-2/3 group-disabled:hidden group-hover:border-b-2 bg-in-cyan/10 border-in-cyan text-in-white invisible group-hover:visible',
     ordericon: 'size-4 shrink-0',
   },
   variants: {

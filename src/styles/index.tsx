@@ -1,6 +1,6 @@
 export { AuthVariants } from './auth'
 export { DashboardVariants } from './dashboard'
-export { DialogVariants } from './dialog'
+export { DetailVariants } from './detail'
 export { FormVariants } from './form'
 export { HeaderVariants } from './header'
 export { MenuVariants } from './menu'

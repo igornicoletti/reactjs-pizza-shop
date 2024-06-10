@@ -1,4 +1,4 @@
-import { PaginationVariants } from '../styles'
+import { PaginationVariants } from '../../../styles'
 import { ChevronLeftIcon, ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon } from 'lucide-react'
 
 const { pagingcontent, pagingwrapper, paginggroup, pagingaction, pagingicon } = PaginationVariants()
@@ -10,7 +10,7 @@ type Props = {
   handlePagination: (pageIndex: number) => Promise<void> | void
 }
 
-export const PaginationComponent = ({ pageIndex, totalCount, peerPage, handlePagination }: Props) => {
+export const OrderPagePagination = ({ pageIndex, totalCount, peerPage, handlePagination }: Props) => {
   const pages = Math.ceil(totalCount / peerPage) || 1
 
   return (

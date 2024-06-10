@@ -1,3 +1,3 @@
 export { AppPage } from './root'
-export { DashboardPage } from './dashboard'
-export { OrderPage } from './order'
+export { DashboardPage } from './dashboard/dashboard'
+export { OrderPage } from './order/order'
