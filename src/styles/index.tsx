@@ -1,4 +1,5 @@
 export { AuthVariants } from './auth'
+export { CardVariants } from './card'
 export { DashboardVariants } from './dashboard'
 export { DetailVariants } from './detail'
 export { FormVariants } from './form'

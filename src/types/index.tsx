@@ -1,24 +1,5 @@
 export type OrderStatusProps = 'pending' | 'canceled' | 'processing' | 'delivering' | 'delivered'
 
-export type OrderProps = {
-  orders: {
-    orderId: string
-    createdAt: string
-    status: OrderStatusProps
-    customerName: string
-    total: number
-  }[]
-  meta: {
-    pageIndex: number
-    perPage: number
-    totalCount: number
-  }
-}
-
-export type OrderIdProps = {
-  orderId: string
-}
-
 export type DetailProps = {
   status: OrderStatusProps
   id: string
@@ -45,6 +26,50 @@ export type FilterProps = {
   status?: string | null
 }
 
+export type MetricsDayProps = {
+  amount: number
+  diffFromYesterday: number
+}
+
+export type MetricsMonthProps = {
+  amount: number
+  diffFromLastMonth: number
+}
+
+export type MetricsRevenueProps = {
+  receipt: number
+  diffFromLastMonth: number
+}
+
+export type MetricsPopularProps = {
+  product: string
+  amount: number
+}[]
+
+export type MetricsPeriodProps = {
+  date: string
+  receipt: number
+}[]
+
+export type OrderIdProps = {
+  orderId: string
+}
+
+export type OrderProps = {
+  orders: {
+    orderId: string
+    createdAt: string
+    status: OrderStatusProps
+    customerName: string
+    total: number
+  }[]
+  meta: {
+    pageIndex: number
+    perPage: number
+    totalCount: number
+  }
+}
+
 export type ProfileProps = {
   id: string
   name: string
@@ -52,6 +77,16 @@ export type ProfileProps = {
   createdAt: Date | null
   updatedAt: Date | null
   role: 'manager' | 'customer'
+}
+
+export type RechartsProps = {
+  cx: string
+  cy: string
+  midAngle: string
+  innerRadius: number
+  outerRadius: number
+  value: string
+  index: number
 }
 
 export type RestaurantProps = {
@@ -79,14 +114,4 @@ export type ToastProps = {
   title: string
   description: string
   type: 'info' | 'danger' | 'success' | 'warning'
-}
-
-export type RechartsProps = {
-  cx: string
-  cy: string
-  midAngle: string
-  innerRadius: number
-  outerRadius: number
-  value: string
-  index: number
 }

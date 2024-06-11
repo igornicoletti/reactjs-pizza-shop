@@ -25,7 +25,7 @@ export const MenuComponent = () => {
 
   const { mutateAsync: signout } = useMutation({
     mutationFn: SignOutApi,
-    onSuccess: () => navigate('/signin', { replace: true })
+    async onSuccess() { navigate('/signin', { replace: true }) }
   })
 
   return (

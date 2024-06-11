@@ -29,9 +29,9 @@ export const OrderPageList = ({ order }: Props) => {
   }
 
   const handleStatus = (orderId: string, status: OrderStatusProps) => {
-    const onderListCache = queryClient.getQueriesData<OrderProps>({ queryKey: ['order'] })
-    onderListCache.forEach(([cacheKey, cacheData]) => {
-      if (!cacheData) return
+    const orderListCache = queryClient.getQueriesData<OrderProps>({ queryKey: ['order'] })
+    orderListCache.forEach(([cacheKey, cacheData]) => {
+      if (!cacheData) { return }
       queryClient.setQueryData<OrderProps>(cacheKey, {
         ...cacheData,
         orders: cacheData.orders.map((data) => data.orderId === orderId
@@ -121,7 +121,7 @@ export const OrderPageList = ({ order }: Props) => {
                         <span className={ordertooltip({ color: 'delivered' })}>Concluído</span>
                       </button>
                     )}
-                    {data.status === 'delivered' && (
+                    {(data.status === 'delivered' || data.status === 'canceled') && (
                       <button className={orderaction({ color: 'delivered' })} disabled={true}>
                         <PizzaIcon className={ordericon()} aria-hidden={true} />
                         <span className={ordertooltip({ color: 'delivered' })}>Concluído</span>

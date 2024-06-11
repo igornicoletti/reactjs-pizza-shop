@@ -1,4 +1,5 @@
 export { DetailApi } from './detail'
+export { CanceledApi, DayApi, MonthApi, RevenueApi, PopulartApi, PeriodApi } from './metrics'
 export { OrderApi } from './order'
 export { ProfileApi } from './profile'
 export { RestaurantApi } from './restaurant'
